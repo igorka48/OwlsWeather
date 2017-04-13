@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  Copyright (C) 2012 The Android Open Source Project
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+<resources>
+
+    <string name="app_name">Погода від rp5</string>
+    <string name="defaultLanguage">ua</string>
+    <!-- Kiev -->
+    <string name="defaultTownCode">509938</string>
+
+    <!-- Menu items -->
+    <string name="settings">Налаштування</string>
+    <string name="refresh">Оновити</string>
+
+    <!-- Settings -->
+    <string name="town_code_summary">Редагуйте, якщо знаєте rp5-код свого міста.</string>
+    <string name="town_code_title">Код міста</string>
+    <string name="find_code">Знайти код міста</string>
+    <string name="lang_summary">Мова погодних даних.</string>
+    <string name="lang_title">Мова</string>
+    <string name="net_summary">Network connectivity required to download the weather feed.</string>
+    <string name="net_title">Network Type</string>
+
+    <!-- NetworkActivity -->
+    <string name="page_title">Newest StackOverflow questions tagged \'android\'</string>
+    <string name="updated">Last updated:</string>
+    <string name="lost_connection">Lost connection.</string>
+    <string name="wifi_connected">Wi-Fi reconnected.</string>
+    <string name="connection_error">Unable to load content. Check your network connection.</string>
+    <string name="xml_error">Error parsing XML.</string>
+    <string name="air_temperature">Температура повітря: </string>
+    <string name="atmospheric_pressure">Атмосферний тиск: </string>
+    <string name="humidity">Вологість: </string>
+    <string name="wind_direction">Напрямок вітру: </string>
+    <string name="wind_force">Сила вітру: </string>
+    <string name="rain">Дощ: </string>
+    <string name="snow">Сніг: </string>
+    <string name="date">Дата: </string>
+    <string name="weather">Погода</string>
+    <string name="vind_units"> м/сек</string>
+    <string name="temp_units">&#176;</string>
+    <string name="press_units">mm</string>
+    <string name="hum_units">%</string>
+    <string name="rp5_cr">Данні взяті з www.rp5.ua</string>
+    <string name="title_activity_search_town">Пошук кода міста</string>
+    <string name="action_settings">Налаштування</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="widget_town_title">Місто</string>
+    <string name="widget_town_summary">Місто, котре відображувати у віджеті</string>
+    <string name="search">Пошук</string>
+    <string name="forward">Вперед</string>
+    <string name="back">Назад</string>
+    <string name="day">день</string>
+    <string name="night">ніч</string>
+    <string name="more">Ще</string>
+    <string name="local_time">Місцевий час: </string>
+
+</resources>

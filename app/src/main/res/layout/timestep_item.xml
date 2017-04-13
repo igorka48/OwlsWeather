@@ -1,0 +1,86 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="90dp"
+    android:layout_height="160dp"
+    android:background="#ffdffcff">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="-4dp"
+        android:scaleType="center"
+        android:src="@drawable/midle_img" />
+
+
+    <ImageView
+        android:id="@+id/weatherImage"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_below="@+id/temp_layout"
+        android:layout_centerInParent="true"
+        android:padding="5dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_forecast_cloud_cover_day_5" />
+
+    <ImageView
+        android:id="@+id/rainImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/weatherImage"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-10dp"
+        android:src="@drawable/ic_forecast_rain_2" />
+
+    <TextView
+        android:id="@+id/weekDayTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text=""
+        android:textColor="#FFD0145F"
+        android:textSize="12dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/timeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:alpha="0.8"
+        android:text=""
+        android:textColor="#FFD0145F"
+        android:textSize="16dp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:id="@+id/temp_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/timeTextView"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tempTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="+25"
+            android:textColor="#ffd0145f"
+            android:textSize="26dp" />
+
+        <TextView
+            android:id="@+id/units"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/temp_units"
+            android:textColor="#FFD0145F"
+            android:textSize="26dp" />
+    </LinearLayout>
+
+
+</RelativeLayout>

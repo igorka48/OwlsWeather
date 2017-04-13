@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  Copyright (C) 2012 The Android Open Source Project
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+<resources>
+
+    <string name="app_name">rp5 wetter</string>
+    <string name="defaultLanguage">de</string>
+    <!-- Berlin -->
+    <string name="defaultTownCode">6359</string>
+
+    <!-- Menu items -->
+    <string name="settings">Einstellungen</string>
+    <string name="refresh">Aktualisieren</string>
+
+    <!-- Settings -->
+    <string name="town_code_summary">Bearbeiten, wenn Sie rp5-Code für Ihre Stadt kennen.</string>
+    <string name="town_code_title">Stadtcode</string>
+    <string name="find_code">Finden Sie Ihre Stadt Code</string>
+    <string name="lang_summary">Sprache für Wetterdaten.</string>
+    <string name="lang_title">Sprachlich</string>
+    <string name="net_summary">Die Netzwerkverbindung erforderlich, um die Wetter-Feed downloaden.</string>
+    <string name="net_title">Netzwerktyp</string>
+
+    <!-- NetworkActivity -->
+    <string name="updated">Zuletzt aktualisiert:</string>
+    <string name="lost_connection">Verlorene verbindung.</string>
+    <string name="wifi_connected">Wi-Fi wiederhergestellt.</string>
+    <string name="connection_error">Inhalte können nicht geladen werden. Überprüfen Sie Ihre Netzwerkverbindung.</string>
+    <string name="xml_error">XML-Parsing error.</string>
+    <string name="air_temperature">Temperatur: </string>
+    <string name="atmospheric_pressure">Druck: </string>
+    <string name="humidity">Feuchtigkeit: </string>
+    <string name="wind_direction">Windrichtung: </string>
+    <string name="wind_force">Windstärke: </string>
+    <string name="rain">Regen: </string>
+    <string name="snow">Schnee: </string>
+    <string name="date">Datum: </string>
+    <string name="vind_units"> m/s</string>
+    <string name="temp_units">&#176;C</string>
+    <string name="press_units">mm</string>
+    <string name="hum_units">%</string>
+    <string name="rp5_cr">Präsentiert von www.rp5.ua</string>
+    <string name="title_activity_search_town">Stadt suchen</string>
+    <string name="action_settings">Einstellung</string>
+    <string name="weather">Wetter</string>
+    <string name="search">Suche</string>
+    <string name="forward">Weiterleiten</string>
+    <string name="back">Zurück</string>
+    <string name="day">tag</string>
+    <string name="night">nacht</string>
+    <string name="local_time">Ortszeit: </string>
+
+</resources>

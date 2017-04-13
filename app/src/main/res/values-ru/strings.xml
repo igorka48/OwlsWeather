@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  Copyright (C) 2012 The Android Open Source Project
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <string name="app_name">Погода от rp5</string>
+    <string name="defaultLanguage">ru</string>
+    <!-- Moscov -->
+    <string name="defaultTownCode">42468</string>
+
+    <!-- Menu items -->
+    <string name="settings">Настройки</string>
+    <string name="refresh">Обновить</string>
+
+    <!-- Settings -->
+    <string name="town_code_summary">Редактируйсте, если знаете rp5-код своего города.</string>
+    <string name="town_code_title">Код города</string>
+    <string name="find_code">Найти код города</string>
+    <string name="lang_summary">Язык для погодных данных.</string>
+    <string name="lang_title">Язык</string>
+    <string name="net_summary">Подключения к сети, необходимое для загрузки погоды.</string>
+    <string name="net_title">Тип сети</string>
+
+    <!-- NetworkActivity -->
+    <string name="page_title" tools:ignore="ExtraTranslation">Newest StackOverflow questions tagged \'android\'</string>
+    <string name="updated">Последнее обновление:</string>
+    <string name="lost_connection">Потеряно соединение.</string>
+    <string name="wifi_connected">Повторное подключение WiFi.</string>
+    <string name="connection_error">Невозможно загрузить контент. Проверьте подключение к сети.</string>
+    <string name="xml_error">Ошибка разбора XML.</string>
+    <string name="air_temperature">Температура воздуха: </string>
+    <string name="atmospheric_pressure"> Атмосферное давление: </string>
+    <string name="humidity">Влажность: </string>
+    <string name="wind_direction">Направление ветра: </string>
+    <string name="wind_force">Сила ветра: </string>
+    <string name="rain">Дождь: </string>
+    <string name="snow">Снег: </string>
+    <string name="date">Дата: </string>
+    <string name="vind_units"> м/сек</string>
+    <string name="temp_units">&#176;</string>
+    <string name="press_units">mm</string>
+    <string name="hum_units">%</string>
+    <string name="rp5_cr">Данные взяты с www.rp5.ru</string>
+    <string name="title_activity_search_town">Поиск города</string>
+    <string name="action_settings">Настройки</string>
+    <string name="weather">Погода</string>
+    <string name="search">Поиск</string>
+    <string name="forward">Вперед</string>
+    <string name="back">Назад</string>
+    <string name="day">день</string>
+    <string name="night">ночь</string>
+    <string name="local_time">Местное время: </string>
+    <string name="more">Еще</string>
+        <string name="widget_town_title">Town</string>
+    <string name="widget_town_summary">Town for widget</string>
+    <string name="site_url">"http://rp5.ru/"</string>
+    <string name="wap_site_url">"http://wap.rp5.ru/"</string>
+    <string name="mobile_site_url">"http://m.rp5.ru/"</string>
+
+</resources>

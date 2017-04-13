@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="link_color">#00b4ea</color>
+    <color name="text_color_day">#0b464e</color>
+    <color name="text_color_night">#21e5f7</color>
+    <color name="text_color_gray">#888888</color>
+    <color name="text_color_timestep">#ffffff</color>
+
+    <color name="day_block">#ccd4d9</color>
+    <color name="day_block_selected">#aa30addc</color>
+    <color name="night_block">#aa0b416e</color>
+    <color name="new_color_city">#3F51B5</color>
+</resources>
