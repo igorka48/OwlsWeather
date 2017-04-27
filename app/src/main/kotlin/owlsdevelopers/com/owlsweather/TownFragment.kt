@@ -31,7 +31,7 @@ import owlsdevelopers.com.owlsweather.data.FU
 import owlsdevelopers.com.owlsweather.weatherlib.WeatherFragment
 import java.util.*
 import android.support.v7.widget.LinearLayoutManager
-
+import owlsdevelopers.com.owlsweather.data.ui.WeatherTimestep
 
 
 class TownFragment : WeatherFragment() {
@@ -51,7 +51,7 @@ class TownFragment : WeatherFragment() {
     private val task: AsyncTask<*, *, *>? = null
     var forceUpdate: Boolean = false
     var broadcastReceiver: WeatherBroadcastReceiver? = null
-    val adapter: TimestepAdapter = TimestepAdapter(ArrayList<DayForecast>(), object: TimestepAdapter.TimestepClickListener {
+    val adapter: TimestepAdapter = TimestepAdapter(ArrayList<WeatherTimestep>(), object: TimestepAdapter.TimestepClickListener {
         override fun itemClicked(i: Int) {
             updateWebTimestepView(i)
         }
@@ -90,7 +90,7 @@ class TownFragment : WeatherFragment() {
                     return
                 }
                 val town = dm.towns[pageNumber]
-                adapter.data = town.forecastItems
+                adapter.data = town.forecast
             }
 
         })
@@ -140,7 +140,7 @@ class TownFragment : WeatherFragment() {
         townTitle.text = town.title
 
         //List<WebTimestep> timesteps = town.getWebTimesteps();
-        val dayForecasts = town.forecastItems ?: return
+        val dayForecasts = town.forecast
 
         if (dayForecasts.size == 0) {
             return
@@ -154,7 +154,7 @@ class TownFragment : WeatherFragment() {
         val dayForecast = dayForecasts[timestep]
 
 
-        val day = FU.isDay(Date(dayForecast.timestamp))
+        val day = FU.isDay(Date(dayForecast.timestep))
         var dispDate = ""
 
         if (day) {
@@ -163,16 +163,9 @@ class TownFragment : WeatherFragment() {
             dispDate += context.resources.getString(R.string.night)
         }
 
-        val date = rootView!!.findViewById(R.id.dateText) as TextView
-        val temp = rootView!!.findViewById(R.id.tempText) as TextView
-        val hum = rootView!!.findViewById(R.id.humidityText) as TextView
-        val windDir = rootView!!
-                .findViewById(R.id.windDirectionText) as TextView
-        val windVel = rootView!!
-                .findViewById(R.id.windVelocityText) as TextView
+
         //TextView rain = (TextView) rootView.findViewById(R.id.rainText);
         //TextView show = (TextView) rootView.findViewById(R.id.snowText);
-        val press = rootView!!.findViewById(R.id.pressureText) as TextView
         val weatherIcon = rootView!!
                 .findViewById(R.id.weather_icon) as ImageView
         val rainIcon = rootView!!.findViewById(R.id.rain_icon) as ImageView
@@ -181,22 +174,22 @@ class TownFragment : WeatherFragment() {
 
         //Init fonts
         townTitle.typeface = impact
-        temp.typeface = impact
-        hum.typeface = impact
-        windDir.typeface = impact
-        windVel.typeface = impact
-        date.typeface = impact
-        press.typeface = impact
+        tempText.typeface = impact
+        humidityText.typeface = impact
+        windDirectionText.typeface = impact
+        windVelocityText.typeface = impact
+        dateText.typeface = impact
+        pressureText.typeface = impact
 
 
         //date.setText( "" + ts.getMonthDay() + ", " + ts.getFormatedTime());
-        date.text = " " + FU.getDisplayLongDate(dayForecast.timestamp)
-        temp.text = "" + dayForecast.forecastTemp.day + "" + context.resources.getString(R.string.temp_units)
-        hum.text = "" + dayForecast.weather.currentCondition.getHumidity() + " "+ context.resources.getString(R.string.hum_units)
+        dateText.text = dayForecast.longDate
+        tempText.text = "" + dayForecast.temperature /* + "" + context.resources.getString(R.string.temp_units)*/
+        humidityText.text = "" + dayForecast.humidity  /* + " "+ context.resources.getString(R.string.hum_units) */
         // windDir.setText("" + ForecastUIHelper.getWindString(mActivity, (int) dayForecast.wind_direction));
         //windDir.setText("" + ts.wind_direction_hint);
-        windVel.text = "" + dayForecast.weather.wind.getSpeed() + " "+ context.resources.getString(R.string.vind_units)
-        press.text = "" + dayForecast.weather.currentCondition.getPressure() + " "+ context.resources.getString(R.string.press_units)
+        windVelocityText.text = "" + dayForecast.wind_velocity /*+ " "+ context.resources.getString(R.string.vind_units)*/
+        pressureText.text = "" + dayForecast.pressure /*+ " "+ context.resources.getString(R.string.press_units)*/
 
 
         // Log.d("Weather", "Clouds: " + dayForecast.cloud_cover);

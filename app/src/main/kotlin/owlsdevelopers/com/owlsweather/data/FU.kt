@@ -35,7 +35,12 @@ class FU {
         }
 
         fun getDisplayLongDate(time: Long): String {
-            val dateFormat = SimpleDateFormat("E, dd MMM HH:mm")
+            val dateFormat = SimpleDateFormat("E, dd MMM")
+            return dateFormat.format(time)
+        }
+
+        fun getDisplayShortDate(time: Long): String {
+            val dateFormat = SimpleDateFormat("E, dd")
             return dateFormat.format(time)
         }
 

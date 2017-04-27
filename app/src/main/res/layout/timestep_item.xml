@@ -73,13 +73,13 @@
             android:textColor="#ffd0145f"
             android:textSize="26dp" />
 
-        <TextView
-            android:id="@+id/units"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/temp_units"
-            android:textColor="#FFD0145F"
-            android:textSize="26dp" />
+        <!--<TextView-->
+            <!--android:id="@+id/units"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/temp_units"-->
+            <!--android:textColor="#FFD0145F"-->
+            <!--android:textSize="26dp" />-->
     </LinearLayout>
 
 

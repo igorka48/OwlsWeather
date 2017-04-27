@@ -16,5 +16,4 @@ class WeatherResponce : Serializable {
         private const val serialVersionUID = 1L
     }
 
-
 }

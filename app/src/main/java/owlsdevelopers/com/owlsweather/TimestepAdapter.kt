@@ -5,15 +5,15 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.survivingwithandroid.weather.lib.model.DayForecast
 import kotlinx.android.synthetic.main.timestep_item.view.*
+import owlsdevelopers.com.owlsweather.data.ui.WeatherTimestep
 
 
-class TimestepAdapter(data: List<DayForecast>,
+class TimestepAdapter(data: List<WeatherTimestep>,
                       private val clickListener: TimestepClickListener) : RecyclerView.Adapter<TimestepAdapter.ViewHolder>() {
 
 
-    var data: List<DayForecast> = data
+    var data: List<WeatherTimestep> = data
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -35,10 +35,10 @@ class TimestepAdapter(data: List<DayForecast>,
         return data.size
     }
 
-    inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
-        fun bindForecast(forecast: DayForecast) {
-            itemView.timeTextView.text = forecast.stringDate
-            itemView.tempTextView.text = "" + forecast.forecastTemp.day
+    inner class ViewHolder(mView: View) : RecyclerView.ViewHolder(mView) {
+        fun bindForecast(forecast: WeatherTimestep) {
+            itemView.timeTextView.text = forecast.shortDate
+            itemView.tempTextView.text = forecast.temperature
         }
     }
 
