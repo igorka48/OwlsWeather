@@ -189,6 +189,7 @@ class TownFragment : WeatherFragment() {
         dateText.typeface = impact
         pressureText.typeface = impact
         tempRealText.typeface = impact
+        sunsetText.typeface = impact
 
 
         //date.setText( "" + ts.getMonthDay() + ", " + ts.getFormatedTime());
@@ -203,6 +204,8 @@ class TownFragment : WeatherFragment() {
         tempRealText.text = dayForecast.realFeel
         weatherIcon.setImageResource(dayForecast.cloudImgResId)
         rainIcon.setImageResource(dayForecast.precipitationImgResId)
+        moonText.setCompoundDrawablesRelativeWithIntrinsicBounds(dayForecast.moonImgResId, 0, 0, 0)
+        sunsetText.text = dayForecast.sunriceSunset
 
         // Log.d("Weather", "Clouds: " + dayForecast.cloud_cover);
         /*

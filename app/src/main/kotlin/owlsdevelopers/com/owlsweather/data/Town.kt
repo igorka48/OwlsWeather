@@ -1,5 +1,6 @@
 package owlsdevelopers.com.owlsweather.data
 
+import android.location.Location
 import owlsdevelopers.com.owlsweather.data.ui.WeatherTimestep
 
 data class Town(var townName: String = "",
@@ -12,4 +13,6 @@ data class Town(var townName: String = "",
            lastUpdateTimestamp = System.currentTimeMillis()
            field = value
        }
+
+    var location: Location? = null
 }

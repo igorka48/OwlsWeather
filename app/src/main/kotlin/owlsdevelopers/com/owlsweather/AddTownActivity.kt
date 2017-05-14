@@ -100,7 +100,6 @@ class AddTownActivity : Activity() {
             Log.d("Weather", "Towns count: " + dm.towns.size)
             val town = Town(townName = city.name, townCode = city.id)
             town.title = city.name
-
             dm.addTown(town, true)
             dm.save(this)
 

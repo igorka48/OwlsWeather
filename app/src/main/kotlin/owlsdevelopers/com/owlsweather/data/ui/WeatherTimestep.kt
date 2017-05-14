@@ -50,6 +50,9 @@ data class WeatherTimestep(var temperature: String = "0", var humidity: String =
 
     var cloudImgResId: Int = 0
     var precipitationImgResId: Int = 0
+    var moonImgResId: Int = 0
+    var sunriceSunset: String = "00:00/00:00"
+
 
     companion object {
 

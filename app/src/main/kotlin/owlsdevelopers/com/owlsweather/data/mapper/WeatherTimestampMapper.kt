@@ -1,12 +1,15 @@
 package owlsdevelopers.com.owlsweather.data.mapper
 
 import android.content.Context
+import com.luckycatlabs.sunrisesunset.SunriseSunsetCalculator
+import com.luckycatlabs.sunrisesunset.dto.Location
 import com.survivingwithandroid.weather.lib.model.BaseWeather
 import com.survivingwithandroid.weather.lib.model.DayForecast
 import com.survivingwithandroid.weather.lib.model.WeatherForecast
 import com.survivingwithandroid.weather.lib.util.WindDirection
 import owlsdevelopers.com.owlsweather.data.FU
 import owlsdevelopers.com.owlsweather.data.ui.WeatherTimestep
+import java.util.*
 
 /**
  * Created by igorka on 4/27/17.
@@ -47,7 +50,15 @@ class WeatherTimestampMapper {
         timestamp.conditionDsc = day.weather.currentCondition.condition
         timestamp.cloudImgResId = WeatherIconMapper.getCloudResource(context, day.weather.currentCondition.icon)
         timestamp.precipitationImgResId = WeatherIconMapper.getPrecipitationResource(context, day.weather.currentCondition.icon)
+        timestamp.moonImgResId = MoonIconMapper.getMoonResource(context, timestamp.timestep)
 
+        val location =  Location(day.weather.location.latitude.toDouble(), day.weather.location.longitude.toDouble())
+        val calculator =  SunriseSunsetCalculator(location, TimeZone.getDefault().id)
+        val cal = Calendar.getInstance()
+        cal.time = Date(timestamp.timestep)
+        val sunrise = calculator.getOfficialSunriseForDate(cal)
+        val sunset = calculator.getOfficialSunsetForDate(cal)
+        timestamp.sunriceSunset = "$sunrise/$sunset"
 
 
 //        when(time){

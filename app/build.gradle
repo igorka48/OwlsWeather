@@ -52,6 +52,7 @@ dependencies {
     compile "com.android.support:design:$support_version"
     compile "com.survivingwithandroid:weatherlib:$weatherlib_version"
     compile "com.survivingwithandroid:weatherlib_okhttpclient:$weatherlib_version"
+    compile 'com.luckycatlabs:SunriseSunsetCalculator:1.2'
 
     compile "com.google.code.gson:gson:$gson_version"
 
