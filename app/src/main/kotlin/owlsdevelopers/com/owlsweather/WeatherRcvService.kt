@@ -57,7 +57,7 @@ class WeatherRcvService : IntentService("WeatherRcvService") {
 
                 val town = data.getTownByCode(cityId)
 
-                town?.forecast = WeatherTimestampMapper().map(forecast)
+                town?.forecast = WeatherTimestampMapper().map(this@WeatherRcvService, forecast)
 
                 data.save(this@WeatherRcvService)
 
@@ -84,9 +84,13 @@ class WeatherRcvService : IntentService("WeatherRcvService") {
                 WeatherBroadcastReceiver.sendLoadingCompleted(this@WeatherRcvService)
             }
 
-            override fun onWeatherError(wle: WeatherLibException) {}
+            override fun onWeatherError(wle: WeatherLibException) {
+                WeatherBroadcastReceiver.sendLoadingError(this@WeatherRcvService, wle)
+            }
 
-            override fun onConnectionError(t: Throwable) {}
+            override fun onConnectionError(t: Throwable) {
+                WeatherBroadcastReceiver.sendLoadingError(this@WeatherRcvService, t)
+            }
         })
     }
 

@@ -31,6 +31,7 @@ import owlsdevelopers.com.owlsweather.data.FU
 import owlsdevelopers.com.owlsweather.weatherlib.WeatherFragment
 import java.util.*
 import android.support.v7.widget.LinearLayoutManager
+import android.widget.Toast
 import owlsdevelopers.com.owlsweather.data.ui.WeatherTimestep
 
 
@@ -51,11 +52,6 @@ class TownFragment : WeatherFragment() {
     private val task: AsyncTask<*, *, *>? = null
     var forceUpdate: Boolean = false
     var broadcastReceiver: WeatherBroadcastReceiver? = null
-    val adapter: TimestepAdapter = TimestepAdapter(ArrayList<WeatherTimestep>(), object: TimestepAdapter.TimestepClickListener {
-        override fun itemClicked(i: Int) {
-            updateWebTimestepView(i)
-        }
-    })
 
 
     override fun refreshData() {
@@ -76,8 +72,20 @@ class TownFragment : WeatherFragment() {
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+
+        val adapter: TimestepAdapter = TimestepAdapter(context, ArrayList<WeatherTimestep>(), object: TimestepAdapter.TimestepClickListener {
+            override fun itemClicked(i: Int) {
+                updateWebTimestepView(i)
+            }
+        })
+
         updateWebTimestepView(0)
-        broadcastReceiver = WeatherBroadcastReceiver.sing(context, object : WeatherBroadcastReceiver.WeatherLoaderCallback {
+        broadcastReceiver = WeatherBroadcastReceiver.sign(context, object : WeatherBroadcastReceiver.WeatherLoaderCallback {
+            override fun loadingError(message: String) {
+                progressBar.visibility = View.GONE
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+            }
+
             override fun loadingStart() {
                 progressBar.visibility = View.VISIBLE
             }
@@ -103,7 +111,7 @@ class TownFragment : WeatherFragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-        WeatherBroadcastReceiver.unsing(context, broadcastReceiver)
+        WeatherBroadcastReceiver.unsign(context, broadcastReceiver)
     }
 
     fun timeStepAction(v: View) {
@@ -180,6 +188,7 @@ class TownFragment : WeatherFragment() {
         windVelocityText.typeface = impact
         dateText.typeface = impact
         pressureText.typeface = impact
+        tempRealText.typeface = impact
 
 
         //date.setText( "" + ts.getMonthDay() + ", " + ts.getFormatedTime());
@@ -188,9 +197,12 @@ class TownFragment : WeatherFragment() {
         humidityText.text = "" + dayForecast.humidity  /* + " "+ context.resources.getString(R.string.hum_units) */
         // windDir.setText("" + ForecastUIHelper.getWindString(mActivity, (int) dayForecast.wind_direction));
         //windDir.setText("" + ts.wind_direction_hint);
-        windVelocityText.text = "" + dayForecast.wind_velocity /*+ " "+ context.resources.getString(R.string.vind_units)*/
+        windVelocityText.text = "" + dayForecast.windVelocity /*+ " "+ context.resources.getString(R.string.vind_units)*/
+        windDirectionText.text = dayForecast.windDirection
         pressureText.text = "" + dayForecast.pressure /*+ " "+ context.resources.getString(R.string.press_units)*/
-
+        tempRealText.text = dayForecast.realFeel
+        weatherIcon.setImageResource(dayForecast.cloudImgResId)
+        rainIcon.setImageResource(dayForecast.precipitationImgResId)
 
         // Log.d("Weather", "Clouds: " + dayForecast.cloud_cover);
         /*

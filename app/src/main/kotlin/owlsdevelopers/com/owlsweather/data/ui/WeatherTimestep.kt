@@ -31,10 +31,7 @@ data class WeatherTimestep(var temperature: String = "0", var humidity: String =
 
     var precipitation: Float = 0.toFloat()
 
-
-    var wind_direction: String? = null
-
-    var wind_velocity: String? = null
+    var windVelocity: String? = null
 
     var falls: Int = 0
 
@@ -47,7 +44,12 @@ data class WeatherTimestep(var temperature: String = "0", var humidity: String =
     var cloudImg: String? = null
     var fallingsImg: String? = null
 
+    var weatherImg: String? = null
     var localTime: Int = 0
+    var conditionDsc: String? = null
+
+    var cloudImgResId: Int = 0
+    var precipitationImgResId: Int = 0
 
     companion object {
 

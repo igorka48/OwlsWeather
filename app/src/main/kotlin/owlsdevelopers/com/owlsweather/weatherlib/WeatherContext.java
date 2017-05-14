@@ -31,6 +31,7 @@ public class WeatherContext {
 
         try {
             WeatherConfig config = new WeatherConfig();
+            config.numDays = 10;
             config.ApiKey = "62594feab4bdf0e78e2e04ab3944f1ca";
             client = new WeatherClient.ClientBuilder()
                     .attach(ctx)

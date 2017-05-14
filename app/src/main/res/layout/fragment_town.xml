@@ -55,7 +55,7 @@
                     <TextView
                         android:id="@+id/tempText"
                         android:layout_width="wrap_content"
-                        android:layout_height="110dp"
+                        android:layout_height="120dp"
                         android:layout_alignParentLeft="true"
                         android:text="+25"
                         android:textColor="#ffd0145f"
@@ -70,6 +70,7 @@
                         android:layout_centerInParent="true"
                         android:layout_marginTop="-10dp"
                         android:text="real feel +30"
+                        android:visibility="gone"
                         android:textColor="#ffd0145f"
                         android:textSize="20dp"
                         android:textStyle="normal" />
@@ -90,7 +91,7 @@
                         android:layout_gravity="top"
                         android:adjustViewBounds="true"
                         android:scaleType="centerInside"
-                        android:src="@drawable/ic_forecast_cloud_cover_day_5" />
+                        android:src="@drawable/ic_forecast_cloud_cover_day_3" />
 
                     <ImageView
                         android:id="@+id/rain_icon"
@@ -247,7 +248,7 @@
     <RelativeLayout
         android:id="@+id/timestepsListContainer"
         android:layout_width="match_parent"
-        android:layout_height="160dp"
+        android:layout_height="190dp"
         android:layout_alignParentBottom="true">
 
         <android.support.v7.widget.RecyclerView

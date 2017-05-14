@@ -21,7 +21,7 @@
         android:layout_centerInParent="true"
         android:padding="5dp"
         android:scaleType="centerInside"
-        android:src="@drawable/ic_forecast_cloud_cover_day_5" />
+        android:src="@drawable/ic_forecast_cloud_cover_day_3" />
 
     <ImageView
         android:id="@+id/rainImage"
@@ -53,7 +53,7 @@
         android:alpha="0.8"
         android:text=""
         android:textColor="#FFD0145F"
-        android:textSize="16dp"
+        android:textSize="14dp"
         android:textStyle="bold" />
 
     <LinearLayout
@@ -71,7 +71,7 @@
             android:layout_gravity="center_horizontal"
             android:text="+25"
             android:textColor="#ffd0145f"
-            android:textSize="26dp" />
+            android:textSize="16dp" />
 
         <!--<TextView-->
             <!--android:id="@+id/units"-->

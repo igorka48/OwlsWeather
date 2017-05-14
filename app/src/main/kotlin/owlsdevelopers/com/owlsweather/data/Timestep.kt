@@ -32,6 +32,9 @@ class Timestep : Serializable {
     var drops: Float = 0.toFloat()
         private set
 
+    var cloudImgResId: Int = 0
+    var precipitationImgResId: Int = 0
+
     fun setDrops(drops: Int) {
         this.drops = drops.toFloat()
     }

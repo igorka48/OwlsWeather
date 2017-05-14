@@ -1,6 +1,8 @@
 package owlsdevelopers.com.owlsweather
 
 
+import android.content.Context
+import android.graphics.Typeface
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -9,8 +11,9 @@ import kotlinx.android.synthetic.main.timestep_item.view.*
 import owlsdevelopers.com.owlsweather.data.ui.WeatherTimestep
 
 
-class TimestepAdapter(data: List<WeatherTimestep>,
+class TimestepAdapter(val context: Context, data: List<WeatherTimestep>,
                       private val clickListener: TimestepClickListener) : RecyclerView.Adapter<TimestepAdapter.ViewHolder>() {
+
 
 
     var data: List<WeatherTimestep> = data
@@ -22,13 +25,19 @@ class TimestepAdapter(data: List<WeatherTimestep>,
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TimestepAdapter.ViewHolder {
         val view = LayoutInflater.from(parent.context)
                 .inflate(R.layout.timestep_item, parent, false)
-        return ViewHolder(view)
+        val impact = Typeface.createFromAsset(context.assets, "Impact.ttf")
+        val vh = ViewHolder(view)
+        vh.itemView.timeTextView.typeface = impact
+        vh.itemView.tempTextView.typeface = impact
+        return vh
     }
 
     override fun onBindViewHolder(holder: TimestepAdapter.ViewHolder, position: Int) {
         val dayForecast = data[position]
         holder.bindForecast(dayForecast)
-        holder.itemView.setOnClickListener { clickListener.itemClicked(position) }
+        holder.itemView.setOnClickListener { clickListener.itemClicked(position)
+
+        }
     }
 
     override fun getItemCount(): Int {
@@ -39,6 +48,8 @@ class TimestepAdapter(data: List<WeatherTimestep>,
         fun bindForecast(forecast: WeatherTimestep) {
             itemView.timeTextView.text = forecast.shortDate
             itemView.tempTextView.text = forecast.temperature
+            itemView.weatherImage.setImageResource(forecast.cloudImgResId)
+            itemView.rainImage.setImageResource(forecast.precipitationImgResId)
         }
     }
 
