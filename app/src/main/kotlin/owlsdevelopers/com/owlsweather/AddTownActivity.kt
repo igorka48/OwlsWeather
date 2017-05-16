@@ -172,6 +172,3 @@ class AddTownActivity : Activity() {
     }
 
 }
-
-
-
