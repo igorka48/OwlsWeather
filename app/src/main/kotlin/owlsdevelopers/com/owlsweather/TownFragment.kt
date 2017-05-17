@@ -73,12 +73,12 @@ class TownFragment : WeatherFragment() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
 
-        val adapter: TimestepAdapter = TimestepAdapter(context, ArrayList<WeatherTimestep>(), object: TimestepAdapter.TimestepClickListener {
+        val adapter: TimestepAdapter = TimestepAdapter(context, ArrayList<WeatherTimestep>(), object : TimestepAdapter.TimestepClickListener {
             override fun itemClicked(i: Int) {
                 updateWebTimestepView(i)
             }
         })
-
+        initViewStyle()
         updateWebTimestepView(0)
         broadcastReceiver = WeatherBroadcastReceiver.sign(context, object : WeatherBroadcastReceiver.WeatherLoaderCallback {
             override fun loadingError(message: String) {
@@ -119,21 +119,21 @@ class TownFragment : WeatherFragment() {
         //updateTimestepView(timestepNum);
     }
 
-    //    public void rp5WebAction(View c) {
-    //        Context context = null;
-    //        context = c.getContext();
-    //
-    //        DataManager dm = ((OwlsWeatherApplication) context
-    //                .getApplicationContext()).dataManager();
-    //        Town town = dm.getTowns().get(mPageNumber);
-    //        Intent browserIntent = new Intent(context, WebViewActivity.class);
-    //        browserIntent.putExtra("URL", BROWSER_URL + town.getRp5Code() + "/"
-    //                + languageCode);
-    //        browserIntent.putExtra("TITLE",
-    //                context.getResources().getString(R.string.weather) + " "
-    //                        + town.getTownName());
-    //        context.startActivity(browserIntent);
-    //    }
+
+    fun initViewStyle() {
+        val impact = Typeface.createFromAsset(context.assets, "Impact.ttf")
+
+        //Init fonts
+        townTitle.typeface = impact
+        tempText.typeface = impact
+        humidityText.typeface = impact
+        windDirectionText.typeface = impact
+        windVelocityText.typeface = impact
+        dateText.typeface = impact
+        pressureText.typeface = impact
+        tempRealText.typeface = impact
+        sunsetText.typeface = impact
+    }
 
 
     fun updateWebTimestepView(timestep: Int) {
@@ -178,19 +178,6 @@ class TownFragment : WeatherFragment() {
                 .findViewById(R.id.weather_icon) as ImageView
         val rainIcon = rootView!!.findViewById(R.id.rain_icon) as ImageView
 
-        val impact = Typeface.createFromAsset(context.assets, "Impact.ttf")
-
-        //Init fonts
-        townTitle.typeface = impact
-        tempText.typeface = impact
-        humidityText.typeface = impact
-        windDirectionText.typeface = impact
-        windVelocityText.typeface = impact
-        dateText.typeface = impact
-        pressureText.typeface = impact
-        tempRealText.typeface = impact
-        sunsetText.typeface = impact
-
 
         //date.setText( "" + ts.getMonthDay() + ", " + ts.getFormatedTime());
         dateText.text = dayForecast.longDate
@@ -207,76 +194,8 @@ class TownFragment : WeatherFragment() {
         moonText.setCompoundDrawablesRelativeWithIntrinsicBounds(dayForecast.moonImgResId, 0, 0, 0)
         sunsetText.text = dayForecast.sunriceSunset
 
-        // Log.d("Weather", "Clouds: " + dayForecast.cloud_cover);
-        /*
-        if (ts.getCloudImg() != null) {
-			weatherIcon
-					.setImageResource(getImageId(mActivity, ts.getCloudImg()));
-		} else {
-			weatherIcon.setImageDrawable(null);
-		}*/
-        //        weatherIcon.setImageResource(ForecastUIHelper.getCloudCoverImageId(mActivity, (int) dayForecast.cloud_cover.pct, day));
-        //        if (dayForecast.precipitation.mm > 0) {
-        //            rainIcon.setVisibility(View.VISIBLE);
-        //            rainIcon.setImageResource(ForecastUIHelper.getPrecipitationImageId(mActivity, dayForecast.precipitation.mm, (int) dayForecast.precipitation_type));
-        //        } else {
-        //            rainIcon.setVisibility(View.GONE);
-        //            rainIcon.setImageDrawable(null);
-        //        }
-
-        /*
-        if (ts.getFallingsImg() != null) {
-			rainIcon.setVisibility(View.VISIBLE);
-			rainIcon.setImageResource(getImageId(mActivity, ts.getFallingsImg()));
-		} else {
-			rainIcon.setVisibility(View.GONE);
-			rainIcon.setImageDrawable(null);
-		}*/
-
-
     }
 
-    //    public void updateTownView() {
-    //
-    //        if (mActivity == null) {
-    //            return;
-    //        }
-    //
-    //        DataManager dm = ((OwlsWeatherApplication) mActivity
-    //                .getApplicationContext()).dataManager();
-    //
-    //        try {
-    //            if ((dm.getTowns() != null) && (dm.getTowns().size() > mPageNumber)) {
-    //                Town town = dm.getTowns().get(mPageNumber);
-    //                //List<WebTimestep> ts = town.getWebTimesteps();
-    //                List<DayForecast> ts = town.getForecastItems();
-    //                HorizontalListView mHlvSimpleList = (HorizontalListView) rootView
-    //                        .findViewById(R.id.timestepsList);
-    //                TimestepArrayAdapter adapter = new TimestepArrayAdapter(
-    //                        mActivity, ts.toArray(new ForecastItem[ts.size()]));
-    //                mHlvSimpleList.setAdapter(adapter);
-    //                adapter.selectedItem = 0;
-    //
-    //                adapter.notifyDataSetChanged();
-    //
-    //                mHlvSimpleList
-    //                        .setOnItemClickListener(new OnItemClickListener() {
-    //
-    //                            @Override
-    //                            public void onItemClick(AdapterView<?> arg0,
-    //                                                    View arg1, int arg2, long arg3) {
-    //                                updateWebTimestepView(arg2);
-    //                                ((TimestepArrayAdapter) arg0.getAdapter()).selectedItem = arg2;
-    //                                ((TimestepArrayAdapter) arg0.getAdapter()).notifyDataSetChanged();
-    //                            }
-    //
-    //                        });
-    //            }
-    //        } catch (Exception ex) {
-    //
-    //        }
-    //
-    //    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -289,151 +208,7 @@ class TownFragment : WeatherFragment() {
     fun loadWeather() {
         val dm = (context.applicationContext.applicationContext as OwlsWeatherApplication).dataManager
         val town = dm.towns[pageNumber]
-       WeatherRcvService.loadWeather(context, town.townCode)
-
-//        if (mActivity == null) {
-//            if (activity != null) {
-//                mActivity = activity
-//            } else {
-//                return
-//            }
-//        }
-//
-//        val dm = (mActivity!!
-//                .applicationContext as OwlsWeatherApplication).dataManager
-//        val town = dm.towns[pageNumber]
-//
-//        val sharedPrefs = PreferenceManager
-//                .getDefaultSharedPreferences(mActivity)
-//        languageCode = sharedPrefs.getString("langPref", mActivity!!
-//                .resources.getString(R.string.defaultLanguage))
-//
-//
-//        activityIndicator!!.visibility = View.VISIBLE
-//
-//
-//        val req = WeatherRequest("2643743")
-//        getWeatherClient().getForecastWeather(req, object : WeatherClient.ForecastWeatherEventListener {
-//            override fun onWeatherRetrieved(forecast: WeatherForecast) {
-//                forceUpdate = false
-//                activityIndicator!!.visibility = View.INVISIBLE
-//
-//
-//                //                if (isOld) {
-//                //                    Date lastUpdate = town.getLastUpdate();
-//                //                    if (lastUpdate != null) {
-//                //                        Date current = new Date();
-//                //                        long diff = current.getTime() - lastUpdate.getTime();
-//                //                        long hours = TimeUnit.MILLISECONDS.toHours(diff);
-//                //                        if (hours < 5) {
-//                //                            return "ok";
-//                //                        }
-//                //                    }
-//                //                }
-//
-//                town.lastUpdateTimestamp = System.currentTimeMillis()
-//                town.forecast = forecast
-//                // town.setTownName(weatherResponce.response.where);
-//                // town.setTitle(forecast);
-//                //                if (town.getForecastItems().size() > 10) {
-//                //                    succsess = true;
-//                //                }
-//
-//
-//                val data = (context.applicationContext as OwlsWeatherApplication).dataManager
-//                try {
-//                    val oos = ObjectOutputStream(
-//                            FileOutputStream(File(context
-//                                    .filesDir.toString() + "/save.bin")))
-//                    oos.writeObject(data) // write the class as an 'object'
-//                    oos.flush() // flush the stream to insure all of the
-//                    // information
-//                    // was written to 'save.bin'
-//                    oos.close()// close the stream
-//                } catch (ex: Exception) {
-//                    Log.e("Weather", "Error:" + ex.message)
-//                    ex.printStackTrace()
-//                    val articleParams = HashMap<String, String>()
-//                    articleParams.put("error", "" + ex.message)
-//                    // FlurryAgent.logEvent("ERROR", articleParams);
-//                }
-//
-//                try {
-//                    val man = AppWidgetManager.getInstance(mActivity)
-//                    val ids = man.getAppWidgetIds(ComponentName(mActivity,
-//                            WidgetSmall::class.java))
-//                    val updateIntent = Intent()
-//                    updateIntent.action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
-//                    updateIntent.putExtra(WidgetSmall.WIDGET_IDS_KEY, ids)
-//                    mActivity!!.sendBroadcast(updateIntent)
-//
-//                    val idsB = man.getAppWidgetIds(ComponentName(mActivity,
-//                            WidgetBig::class.java))
-//                    val updateIntentB = Intent()
-//                    updateIntentB.action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
-//                    updateIntentB.putExtra(WidgetSmall.WIDGET_IDS_KEY, idsB)
-//                    mActivity!!.sendBroadcast(updateIntentB)
-//
-//                } catch (ex: Exception) {
-//
-//                }
-//
-//                updateWebTimestepView(0)
-//                //updateTownView();
-//            }
-//
-//            override fun onWeatherError(wle: WeatherLibException) {
-//                activityIndicator!!.visibility = View.INVISIBLE
-//            }
-//
-//            override fun onConnectionError(t: Throwable) {
-//                activityIndicator!!.visibility = View.INVISIBLE
-//            }
-//        })
-
-
-        //		Rp5SiteParser parser = new Rp5SiteParser(mActivity, town, languageCode, !forceUpdate);
-        //		parser.parse(new Rp5SiteParserCallBack() {
-        //
-        //			@Override
-        //			public void siteParsed() {
-        //				forceUpdate = false;
-        //				activityIndicator.setVisibility(View.INVISIBLE);
-        //
-        //				try {
-        //					AppWidgetManager man = AppWidgetManager.getInstance(mActivity);
-        //					int[] ids = man.getAppWidgetIds(new ComponentName(mActivity,
-        //							WidgetSmall.class));
-        //					Intent updateIntent = new Intent();
-        //					updateIntent
-        //							.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
-        //					updateIntent.putExtra(WidgetSmall.WIDGET_IDS_KEY, ids);
-        //					mActivity.sendBroadcast(updateIntent);
-        //
-        //					int[] idsB = man.getAppWidgetIds(new ComponentName(mActivity,
-        //							WidgetBig.class));
-        //					Intent updateIntentB = new Intent();
-        //					updateIntentB
-        //							.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
-        //					updateIntentB.putExtra(WidgetSmall.WIDGET_IDS_KEY, idsB);
-        //					mActivity.sendBroadcast(updateIntentB);
-        //
-        //				} catch (Exception ex) {
-        //
-        //				}
-        //
-        //				updateWebTimestepView(0);
-        //				updateTownView();
-        //
-        //			}
-        //
-        //			@Override
-        //			public void error() {
-        //				activityIndicator.setVisibility(View.INVISIBLE);
-        //
-        //			}
-        //		});
-
+        WeatherRcvService.loadWeather(context, town.townCode)
     }
 
 

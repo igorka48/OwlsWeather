@@ -50,15 +50,6 @@
             android:textColor="@color/text_color_night"
             android:textSize="40dp" />
 
-        <TextView
-            android:id="@+id/units1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/temp1"
-            android:text="@string/temp_units"
-            android:textColor="@color/text_color_night"
-            android:textSize="40dp" />
-
         <ImageView
             android:id="@+id/image1"
             android:layout_width="wrap_content"
