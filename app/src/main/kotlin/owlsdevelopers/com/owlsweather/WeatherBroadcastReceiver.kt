@@ -2,7 +2,7 @@ package owlsdevelopers.com.owlsweather
 
 import android.content.*
 
-class WeatherBroadcastReceiver(val callback: WeatherLoaderCallback) : BroadcastReceiver() {
+class WeatherBroadcastReceiver(var callback: WeatherLoaderCallback) : BroadcastReceiver() {
 
     interface WeatherLoaderCallback {
         fun loadingStart()
@@ -29,7 +29,7 @@ class WeatherBroadcastReceiver(val callback: WeatherLoaderCallback) : BroadcastR
 
         fun sign(context: Context,  callback: WeatherLoaderCallback): WeatherBroadcastReceiver {
             var br: WeatherBroadcastReceiver = WeatherBroadcastReceiver(callback)
-            val intentFilter = IntentFilter(WEATHER_LOADING_MESSAGE);
+            val intentFilter = IntentFilter(WEATHER_LOADING_MESSAGE)
             context.registerReceiver(br, intentFilter)
             return br
         }

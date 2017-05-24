@@ -37,15 +37,15 @@ class WidgetBig : AppWidgetProvider() {
     }
 
     override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager,
-                          appWidgetIds: IntArray) {
+                          appWidgetIds: IntArray?) {
         super.onUpdate(context, appWidgetManager, appWidgetIds)
         context.startService(Intent(context, UpdateService::class.java))
 
     }
 
-    override fun onReceive(context: Context, intent: Intent) {
-        if (intent.hasExtra(WIDGET_IDS_KEY)) {
-            val ids = intent.extras.getIntArray(WIDGET_IDS_KEY)
+    override fun onReceive(context: Context, intent: Intent?) {
+        if (intent?.hasExtra(WIDGET_IDS_KEY) ?: false) {
+            val ids = intent?.extras?.getIntArray(WIDGET_IDS_KEY)
             this.onUpdate(context, AppWidgetManager.getInstance(context), ids)
         } else
             super.onReceive(context, intent)
@@ -165,7 +165,7 @@ class WidgetBig : AppWidgetProvider() {
                         updateViews.setViewVisibility(R.id.image3, View.VISIBLE)
                         // updateViews.setTextViewText(R.id.textView3, ts.get(5).getWeekDay())
                         updateViews.setImageViewResource(R.id.image3, ts.get(5).cloudImgResId)
-                        updateViews.setTextViewText(R.id.timeView4, " " + ts.get(5).shortDate)
+                        updateViews.setTextViewText(R.id.timeView3, " " + ts.get(5).shortDate)
 
                     }
                     if (ts.size > 7) {
