@@ -22,6 +22,8 @@ import owlsdevelopers.com.owlsweather.weatherlib.WeatherContext
  * helper methods.
  */
 class WeatherRcvService : IntentService("WeatherRcvService") {
+
+
     private var _weatherClient: WeatherClient? = null
 
 
@@ -44,6 +46,19 @@ class WeatherRcvService : IntentService("WeatherRcvService") {
 
     private fun loadWeatherCall(cityId: String, forceUpdate: Boolean) {
 
+        val data = (this@WeatherRcvService.applicationContext as OwlsWeatherApplication).dataManager
+        val town = data.getTownByCode(cityId)
+        if(town == null){
+            WeatherBroadcastReceiver.sendLoadingCompleted(this@WeatherRcvService)
+            return
+        }
+
+        if(!forceUpdate){
+            if(System.currentTimeMillis() - town.lastUpdateTimestamp < WEATHER_CACHE_TIME){
+                WeatherBroadcastReceiver.sendLoadingCompleted(this@WeatherRcvService)
+                return
+            }
+        }
 
 
         WeatherBroadcastReceiver.sendLoadinStart(this)
@@ -51,14 +66,8 @@ class WeatherRcvService : IntentService("WeatherRcvService") {
         weatherClient.getForecastWeather(req, object : WeatherClient.ForecastWeatherEventListener {
             override fun onWeatherRetrieved(forecast: WeatherForecast) {
 
-
-
-                val data = (this@WeatherRcvService.applicationContext as OwlsWeatherApplication).dataManager
-
-                val town = data.getTownByCode(cityId)
-
-                town?.forecast = WeatherTimestampMapper().map(this@WeatherRcvService, forecast)
-
+                town.forecast = WeatherTimestampMapper().map(this@WeatherRcvService, forecast)
+                town.lastUpdateTimestamp = System.currentTimeMillis()
                 data.save(this@WeatherRcvService)
 
                 try {
@@ -96,7 +105,8 @@ class WeatherRcvService : IntentService("WeatherRcvService") {
 
 
     companion object {
-
+        //private val WEATHER_CACHE_TIME = 3 * 60 * 1000 //3 minutes
+        private val WEATHER_CACHE_TIME = 3 * 60 * 60 * 1000 //3 hours
         private val CITY_ID = "owlsdevelopers.com.owlsweather.extra.CITY_ID"
         private val FORCE_UPDATE = "owlsdevelopers.com.owlsweather.extra.FORCE_UPDATE"
 
@@ -106,9 +116,10 @@ class WeatherRcvService : IntentService("WeatherRcvService") {
 
          * @see IntentService
          */
-        fun loadWeather(context: Context, cityId: String) {
+        fun loadWeather(context: Context, cityId: String, forceUpdate: Boolean) {
             val intent = Intent(context, WeatherRcvService::class.java)
             intent.putExtra(CITY_ID, cityId)
+            intent.putExtra(FORCE_UPDATE, forceUpdate)
             context.startService(intent)
         }
     }

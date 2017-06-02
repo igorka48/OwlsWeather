@@ -114,11 +114,6 @@ class TownFragment : WeatherFragment() {
         WeatherBroadcastReceiver.unsign(context, broadcastReceiver)
     }
 
-    fun timeStepAction(v: View) {
-        //int timestepNum = Integer.parseInt((String) v.getTag());
-        //updateTimestepView(timestepNum);
-    }
-
 
     fun initViewStyle() {
         val impact = Typeface.createFromAsset(context.assets, "Impact.ttf")
@@ -139,7 +134,7 @@ class TownFragment : WeatherFragment() {
     fun updateWebTimestepView(timestep: Int) {
         val dm = (context
                 .applicationContext as OwlsWeatherApplication).dataManager
-        if (pageNumber >= dm.towns?.size) {
+        if (pageNumber >= dm.towns.size) {
             return
         }
         val town = dm.towns[pageNumber]
@@ -147,7 +142,6 @@ class TownFragment : WeatherFragment() {
 
         townTitle.text = town.title
 
-        //List<WebTimestep> timesteps = town.getWebTimesteps();
         val dayForecasts = town.forecast
 
         if (dayForecasts.size == 0) {
@@ -158,7 +152,6 @@ class TownFragment : WeatherFragment() {
         }
 
 
-        //WebTimestep ts = timesteps.get(timestep);
         val dayForecast = dayForecasts[timestep]
 
 
@@ -179,12 +172,9 @@ class TownFragment : WeatherFragment() {
         val rainIcon = rootView!!.findViewById(R.id.rain_icon) as ImageView
 
 
-        //date.setText( "" + ts.getMonthDay() + ", " + ts.getFormatedTime());
         dateText.text = dayForecast.longDate
         tempText.text = "" + dayForecast.temperature /* + "" + context.resources.getString(R.string.temp_units)*/
         humidityText.text = "" + dayForecast.humidity  /* + " "+ context.resources.getString(R.string.hum_units) */
-        // windDir.setText("" + ForecastUIHelper.getWindString(mActivity, (int) dayForecast.wind_direction));
-        //windDir.setText("" + ts.wind_direction_hint);
         windVelocityText.text = "" + dayForecast.windVelocity /*+ " "+ context.resources.getString(R.string.vind_units)*/
         windDirectionText.text = dayForecast.windDirection
         pressureText.text = "" + dayForecast.pressure /*+ " "+ context.resources.getString(R.string.press_units)*/
@@ -208,7 +198,7 @@ class TownFragment : WeatherFragment() {
     fun loadWeather() {
         val dm = (context.applicationContext.applicationContext as OwlsWeatherApplication).dataManager
         val town = dm.towns[pageNumber]
-        WeatherRcvService.loadWeather(context, town.townCode)
+        WeatherRcvService.loadWeather(context, town.townCode, false)
     }
 
 

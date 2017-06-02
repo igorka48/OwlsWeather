@@ -18,7 +18,7 @@
 
 <resources>
 
-    <string name="app_name">Погода від rp5</string>
+    <string name="app_name">Погода</string>
     <string name="defaultLanguage">ua</string>
     <!-- Kiev -->
     <string name="defaultTownCode">509938</string>
@@ -69,5 +69,10 @@
     <string name="night">ніч</string>
     <string name="more">Ще</string>
     <string name="local_time">Місцевий час: </string>
+    <string name="insert_the_city_name">Вкажiть мiсто</string>
+    <string name="results">Результати</string>
+    <string name="unit_system">Unit system</string>
+    <string name="language">Language</string>
+    <string name="town_for_widgets">Town for widgets</string>
 
 </resources>

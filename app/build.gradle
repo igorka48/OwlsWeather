@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 25
@@ -48,16 +49,16 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 
     compile "com.android.support:appcompat-v7:$support_version"
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile "com.android.support:design:$support_version"
     compile "com.survivingwithandroid:weatherlib:$weatherlib_version"
     compile "com.survivingwithandroid:weatherlib_okhttpclient:$weatherlib_version"
-    compile 'com.luckycatlabs:SunriseSunsetCalculator:1.2'
 
     compile "com.google.code.gson:gson:$gson_version"
 
     compile "com.github.hotchemi:permissionsdispatcher:$permissionsdispatcher_version"
     kapt "com.github.hotchemi:permissionsdispatcher-processor:$permissionsdispatcher_version"
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.luckycatlabs:SunriseSunsetCalculator:1.2'
 }
 repositories {
     mavenCentral()

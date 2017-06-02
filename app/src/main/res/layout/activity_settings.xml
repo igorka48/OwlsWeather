@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="owlsdevelopers.com.owlsweather.SettingsActivity"
+    android:gravity="top|left"
+    android:background="@color/background_color"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:textStyle="bold"
+        android:textColor="@color/main_text_color"
+        android:text="@string/unit_system"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+    <Spinner
+        android:id="@+id/spinnerUnits"
+        android:layout_width="match_parent"
+        android:prompt="@string/unit_system"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:textStyle="bold"
+        android:textColor="@color/main_text_color"
+        android:text="@string/language"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+    <Spinner
+        android:layout_marginTop="18dp"
+        android:id="@+id/spinnerLang"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:textStyle="bold"
+        android:textColor="@color/main_text_color"
+        android:text="@string/town_for_widgets"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+    <Spinner
+        android:layout_marginTop="18dp"
+        android:id="@+id/spinnerTown"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>

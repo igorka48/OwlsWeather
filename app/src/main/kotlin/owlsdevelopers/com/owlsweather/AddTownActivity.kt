@@ -68,7 +68,7 @@ class AddTownActivity : Activity() {
 
         client = WeatherContext.getInstance().getClient(this)
 
-        Log.d("App", "Client [$client]")
+       // Log.d("App", "Client [$client]")
 
         //cityList = findViewById(R.id.cityList) as ListView
         //bar = findViewById(R.id.progressBar2) as ProgressBar
@@ -103,8 +103,8 @@ class AddTownActivity : Activity() {
             dm.addTown(town, true)
             dm.save(this)
 
-            Log.d("Weather", "Town added: " + city.id)
-            Log.d("Weather", "Towns count: " + dm.towns.size)
+           // Log.d("Weather", "Town added: " + city.id)
+           // Log.d("Weather", "Towns count: " + dm.towns.size)
 
             if (dm.towns.size == 1) {
                 editor.putString("widgetTownCodePref", "" + city.id)
@@ -118,6 +118,8 @@ class AddTownActivity : Activity() {
         imgLocationSearch.setOnClickListener {
             AddTownActivityPermissionsDispatcher.searchByLocationWithCheck(this)
         }
+
+        AddTownActivityPermissionsDispatcher.searchByLocationWithCheck(this)
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>?, grantResults: IntArray?) {

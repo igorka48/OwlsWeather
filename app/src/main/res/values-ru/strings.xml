@@ -18,7 +18,7 @@
 
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <string name="app_name">Погода от rp5</string>
+    <string name="app_name">Погода</string>
     <string name="defaultLanguage">ru</string>
     <!-- Moscov -->
     <string name="defaultTownCode">42468</string>
@@ -71,5 +71,10 @@
     <string name="site_url">"http://rp5.ru/"</string>
     <string name="wap_site_url">"http://wap.rp5.ru/"</string>
     <string name="mobile_site_url">"http://m.rp5.ru/"</string>
+    <string name="insert_the_city_name">Укажите город</string>
+    <string name="results">Результаты</string>
+    <string name="unit_system">Unit system</string>
+    <string name="language">Language</string>
+    <string name="town_for_widgets">Town for widgets</string>
 
 </resources>

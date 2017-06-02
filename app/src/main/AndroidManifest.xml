@@ -13,7 +13,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
+        android:supportsRtl="false"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -44,12 +44,12 @@
         <receiver
             android:name=".WeatherBroadcastReceiver"
             android:enabled="true"
-            android:exported="false"></receiver>
+            android:exported="false" />
 
         <!-- Broadcast Receiver that will process AppWidget updates -->
         <receiver
             android:name=".WidgetSmall"
-            android:label="@string/widget_name" >
+            android:label="@string/widget_name">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -61,7 +61,7 @@
         <!--  -->
         <receiver
             android:name=".WidgetBig"
-            android:label="@string/widget_name_big" >
+            android:label="@string/widget_name_big">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>

@@ -18,7 +18,7 @@
 
 <resources>
 
-    <string name="app_name">rp5 météo</string>
+    <string name="app_name">Météo</string>
     <string name="defaultLanguage">fr</string>
     <!-- Paris -->
     <string name="defaultTownCode">5028</string>
@@ -63,5 +63,8 @@
     <string name="back">Arrière</string>
     <string name="day">jour</string>
     <string name="night">nuit</string>
+    <string name="unit_system">Unit system</string>
+    <string name="language">Language</string>
+    <string name="town_for_widgets">Town for widgets</string>
 
 </resources>

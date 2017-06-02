@@ -18,7 +18,7 @@
 
 <resources>
 
-    <string name="app_name">rp5 weather</string>
+    <string name="app_name">Weather</string>
     <string name="defaultLanguage">en</string>
     <!-- London -->
     <string name="defaultTownCode">3478</string>
@@ -64,5 +64,10 @@
     <string name="day">day</string>
     <string name="night">night</string>
       <string name="local_time">Local Time: </string>
+    <string name="insert_the_city_name">Insert the city name</string>
+    <string name="results">Results</string>
+    <string name="unit_system">Unit system</string>
+    <string name="language">Language</string>
+    <string name="town_for_widgets">Town for widgets</string>
 
 </resources>

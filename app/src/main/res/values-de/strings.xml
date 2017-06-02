@@ -18,7 +18,7 @@
 
 <resources>
 
-    <string name="app_name">rp5 wetter</string>
+    <string name="app_name">Wetter</string>
     <string name="defaultLanguage">de</string>
     <!-- Berlin -->
     <string name="defaultTownCode">6359</string>
@@ -64,5 +64,8 @@
     <string name="day">tag</string>
     <string name="night">nacht</string>
     <string name="local_time">Ortszeit: </string>
+    <string name="unit_system">Unit system</string>
+    <string name="language">Language</string>
+    <string name="town_for_widgets">Town for widgets</string>
 
 </resources>

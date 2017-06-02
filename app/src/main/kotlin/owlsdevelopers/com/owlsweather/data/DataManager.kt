@@ -54,6 +54,11 @@ class DataManager {
             townsMap.remove(townCode)
     }
 
+    fun removeTown(townIndex: Int) {
+        if (towns.size > townIndex)
+            townsMap.remove(towns[townIndex].townCode)
+    }
+
 
     fun save(context: Context) {
         try {

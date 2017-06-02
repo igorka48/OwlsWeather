@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Owls Weather</string>
+    <string name="app_name">Weather</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
@@ -148,5 +148,10 @@
     <string name="site_url">"http://rp5.ua/"</string>
     <string name="wap_site_url">"http://wap.rp5.ua/"</string>
     <string name="mobile_site_url">"http://m.rp5.ua/"</string>
+    <string name="insert_the_city_name">Insert the city name</string>
+    <string name="results">Results</string>
+    <string name="unit_system">Unit system</string>
+    <string name="language">Language</string>
+    <string name="town_for_widgets">Town for widgets</string>
 
 </resources>
