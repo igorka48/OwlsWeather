@@ -90,6 +90,7 @@ class AddTownActivity : Activity() {
         cityList?.onItemClickListener = AdapterView.OnItemClickListener { parent, view, pos, id ->
             val city = parent.getItemAtPosition(pos) as City
 
+            //TODO REMOVE THIS INTO RCV_SERVICE
             val sharedPrefs = PreferenceManager
                     .getDefaultSharedPreferences(this)
             val editor = sharedPrefs.edit()

@@ -10,7 +10,9 @@ import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.view.View.GONE
+import android.view.View.VISIBLE
 import kotlinx.android.synthetic.main.activity_home.*
 import owlsdevelopers.com.owlsweather.data.DataManager
 
@@ -120,6 +122,12 @@ class HomeActivity : AppCompatActivity() {
     }
 
 
+     fun addTownAction(view: View){
+         val activity = Intent(baseContext,
+                 AddTownActivity::class.java)
+         startActivity(activity)
+    }
+
 
     inner class SectionsPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 
@@ -128,6 +136,11 @@ class HomeActivity : AppCompatActivity() {
         }
 
         override fun getCount(): Int {
+            if(data.towns.isEmpty()){
+                addTownView.visibility = VISIBLE
+            } else {
+                addTownView.visibility = GONE
+            }
             return data.towns.size
         }
 
