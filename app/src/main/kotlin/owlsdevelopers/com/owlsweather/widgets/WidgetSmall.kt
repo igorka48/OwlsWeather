@@ -1,8 +1,8 @@
 package owlsdevelopers.com.owlsweather.widgets
 
-import owlsdevelopers.com.owlsweather.HomeActivity
 import owlsdevelopers.com.owlsweather.R
 import owlsdevelopers.com.owlsweather.data.model.Town
+import owlsdevelopers.com.owlsweather.ui.HomeActivity
 
 
 class WidgetSmall : android.appwidget.AppWidgetProvider() {

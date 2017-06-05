@@ -12,7 +12,6 @@ import android.preference.PreferenceManager
 import android.util.Log
 import android.view.View
 import android.widget.RemoteViews
-import owlsdevelopers.com.owlsweather.MainActivity
 
 import owlsdevelopers.com.owlsweather.OwlsWeatherApplication
 import owlsdevelopers.com.owlsweather.R
@@ -20,6 +19,7 @@ import owlsdevelopers.com.owlsweather.R
 import java.util.Arrays
 
 import owlsdevelopers.com.owlsweather.data.model.Town
+import owlsdevelopers.com.owlsweather.ui.MainActivity
 
 
 class WidgetBig : AppWidgetProvider() {

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package owlsdevelopers.com.owlsweather
+package owlsdevelopers.com.owlsweather.ui
 
 import android.content.Context
 import android.graphics.Typeface
@@ -29,6 +29,10 @@ import kotlinx.android.synthetic.main.fragment_town.*
 import java.util.*
 import android.support.v7.widget.LinearLayoutManager
 import android.widget.Toast
+import owlsdevelopers.com.owlsweather.OwlsWeatherApplication
+import owlsdevelopers.com.owlsweather.R
+import owlsdevelopers.com.owlsweather.WeatherBroadcastReceiver
+import owlsdevelopers.com.owlsweather.WeatherRcvService
 import owlsdevelopers.com.owlsweather.ui.model.WeatherTimestep
 import owlsdevelopers.com.owlsweather.util.FU
 

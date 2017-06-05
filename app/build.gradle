@@ -10,8 +10,8 @@ android {
         applicationId "owlsdevelopers.com.owlsweather"
         minSdkVersion 17
         targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
+        versionCode 17
+        versionName "2.99"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
@@ -59,8 +59,12 @@ dependencies {
     kapt "com.github.hotchemi:permissionsdispatcher-processor:$permissionsdispatcher_version"
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.luckycatlabs:SunriseSunsetCalculator:1.2'
+    compile 'com.github.jrvansuita:MaterialAbout:0.1.5'
+
 }
 repositories {
     mavenCentral()
+    maven { url "https://jitpack.io" }
+
 }
 

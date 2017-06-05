@@ -1,4 +1,4 @@
-package owlsdevelopers.com.owlsweather
+package owlsdevelopers.com.owlsweather.ui
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -6,6 +6,8 @@ import android.view.View
 import android.widget.AdapterView
 import kotlinx.android.synthetic.main.activity_settings.*
 import android.widget.ArrayAdapter
+import owlsdevelopers.com.owlsweather.OwlsWeatherApplication
+import owlsdevelopers.com.owlsweather.R
 import owlsdevelopers.com.owlsweather.data.SettingsRepositoryImp
 import owlsdevelopers.com.owlsweather.data.model.Town
 import owlsdevelopers.com.owlsweather.data.model.UnitSystem

@@ -1,4 +1,4 @@
-package owlsdevelopers.com.owlsweather
+package owlsdevelopers.com.owlsweather.ui
 
 import android.content.Intent
 import android.os.Bundle
@@ -14,6 +14,9 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import kotlinx.android.synthetic.main.activity_home.*
+import owlsdevelopers.com.owlsweather.OwlsWeatherApplication
+import owlsdevelopers.com.owlsweather.R
+import owlsdevelopers.com.owlsweather.WeatherRcvService
 import owlsdevelopers.com.owlsweather.data.DataManager
 
 class HomeActivity : AppCompatActivity() {
@@ -117,16 +120,30 @@ class HomeActivity : AppCompatActivity() {
                 WeatherRcvService.loadWeather(this, data.towns[selectedPage].townCode, true)
                 return true
             }
+            R.id.about -> {
+                showAbout()
+                return true
+            }
             else -> return super.onOptionsItemSelected(item)
         }
     }
 
 
-     fun addTownAction(view: View){
+
+    fun addTownAction(view: View){
          val activity = Intent(baseContext,
                  AddTownActivity::class.java)
          startActivity(activity)
     }
+
+
+
+    fun showAbout(){
+        val activity = Intent(baseContext,
+                AboutActivity::class.java)
+        startActivity(activity)
+    }
+
 
 
     inner class SectionsPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {

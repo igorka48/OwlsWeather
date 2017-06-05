@@ -1,4 +1,4 @@
-package owlsdevelopers.com.owlsweather
+package owlsdevelopers.com.owlsweather.ui
 
 
 import android.content.Context
@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.timestep_item.view.*
+import owlsdevelopers.com.owlsweather.R
 import owlsdevelopers.com.owlsweather.ui.model.WeatherTimestep
 
 
