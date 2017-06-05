@@ -19,7 +19,7 @@ class AboutActivity : AppCompatActivity() {
                 //.setBrief("I'm warmed of mobile technologies. Ideas maker, curious and nature lover.")
                 .setAppIcon(R.mipmap.ic_launcher)
                 .setAppName(R.string.app_name)
-                .addGooglePlayStoreLink("com.rp5_weather")
+                .addGooglePlayStoreLink("com.OwlsWeather")
                 .addGitHubLink("igorka48")
                 //.addFacebookLink("user")
                 .addFiveStarsAction()
