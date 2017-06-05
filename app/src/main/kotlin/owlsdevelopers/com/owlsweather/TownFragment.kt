@@ -20,22 +20,20 @@ import android.content.Context
 import android.graphics.Typeface
 import android.os.AsyncTask
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.TextView
-import com.survivingwithandroid.weather.lib.model.DayForecast
 import kotlinx.android.synthetic.main.fragment_town.*
 import owlsdevelopers.com.owlsweather.data.FU
-import owlsdevelopers.com.owlsweather.weatherlib.WeatherFragment
 import java.util.*
 import android.support.v7.widget.LinearLayoutManager
 import android.widget.Toast
 import owlsdevelopers.com.owlsweather.data.ui.WeatherTimestep
 
 
-class TownFragment : WeatherFragment() {
+class TownFragment : Fragment() {
     /**
      * The fragment's page number, which is set to the argument value for
      * [.ARG_PAGE].
@@ -54,9 +52,6 @@ class TownFragment : WeatherFragment() {
     var broadcastReceiver: WeatherBroadcastReceiver? = null
 
 
-    override fun refreshData() {
-
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

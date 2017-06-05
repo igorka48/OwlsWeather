@@ -29,7 +29,8 @@ class WeatherRcvService : IntentService("WeatherRcvService") {
 
     val weatherClient: WeatherClient
         get() {
-            return _weatherClient ?: WeatherContext.getInstance().getClient(this)
+            val data = (applicationContext as OwlsWeatherApplication).dataManager
+            return _weatherClient ?: WeatherContext.getInstance().getClient(this, data)
         }
 
 

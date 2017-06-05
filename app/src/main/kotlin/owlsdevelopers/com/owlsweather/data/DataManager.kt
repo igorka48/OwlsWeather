@@ -21,9 +21,9 @@ class DataManager {
     var townsMap: HashMap<String, Town> = HashMap()
 
 
-    val towns: List<Town>
+    val towns: Array<Town>
         get() {
-            return townsMap.values.toList()
+            return townsMap.values.toTypedArray()
         }
 
 
@@ -34,10 +34,10 @@ class DataManager {
         this.weather = null
     }
 
-    val town: String
-        get() {
-            return this.weather?.point?.point_name ?: ""
-        }
+//    val town: String
+//        get() {
+//            return this.weather?.point?.point_name ?: ""
+//        }
 
 
     fun getTownByCode(code: String): Town? {
@@ -86,7 +86,7 @@ class DataManager {
                 Log.d("OwlsWeatherApplication", "text " + text)
                 val dataManager = g.fromJson(text, DataManager::class.java)
                 Log.d("OwlsWeatherApplication", "DataManager restored from " + (context.filesDir.toString() + serialFileName))
-                Log.d("OwlsWeatherApplication", "Weather town: " + dataManager.town)
+                //Log.d("OwlsWeatherApplication", "Weather town: " + dataManager.town)
                 return dataManager
             } catch (ex: Exception) {
                 Log.e("OwlsWeatherApplication", "Error:" + ex.message)
@@ -94,6 +94,10 @@ class DataManager {
             }
         }
 
+    }
+
+    fun invalidate() {
+        towns.forEach { t -> t.lastUpdateTimestamp = 0}
     }
 
 }

@@ -65,8 +65,8 @@ class AddTownActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.search_location_activity)
-
-        client = WeatherContext.getInstance().getClient(this)
+        val data = (applicationContext as OwlsWeatherApplication).dataManager
+        client = WeatherContext.getInstance().getClient(this, data)
 
        // Log.d("App", "Client [$client]")
 

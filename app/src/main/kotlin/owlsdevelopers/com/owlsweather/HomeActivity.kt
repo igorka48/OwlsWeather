@@ -72,7 +72,7 @@ class HomeActivity : AppCompatActivity() {
         // Set up the ViewPager with the sections adapter.
         viewPager?.adapter = mSectionsPagerAdapter
         if(data.towns.isNotEmpty())
-            WeatherRcvService.loadWeather(this, data.town, false)
+            WeatherRcvService.loadWeather(this, data.towns[0].townCode, false)
     }
 
 
@@ -114,7 +114,7 @@ class HomeActivity : AppCompatActivity() {
                 return true
             }
             R.id.refresh -> {
-                WeatherRcvService.loadWeather(this, data.town, true)
+                WeatherRcvService.loadWeather(this, data.towns[selectedPage].townCode, true)
                 return true
             }
             else -> return super.onOptionsItemSelected(item)

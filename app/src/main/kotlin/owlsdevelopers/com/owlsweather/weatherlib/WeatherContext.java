@@ -11,10 +11,16 @@ import com.survivingwithandroid.weather.lib.client.okhttp.WeatherDefaultClient;
 import com.survivingwithandroid.weather.lib.exception.WeatherProviderInstantiationException;
 import com.survivingwithandroid.weather.lib.provider.openweathermap.OpenweathermapProviderType;
 
+import owlsdevelopers.com.owlsweather.R;
+import owlsdevelopers.com.owlsweather.data.DataManager;
+import owlsdevelopers.com.owlsweather.data.SettingsRepository;
+import owlsdevelopers.com.owlsweather.data.SettingsRepositoryImp;
+
 
 public class WeatherContext {
     private static WeatherContext me;
     private WeatherClient client;
+    private SettingsRepository settings;
 
     private WeatherContext() {}
 
@@ -25,14 +31,17 @@ public class WeatherContext {
         return me;
     }
 
-    public WeatherClient getClient(Context ctx) {
+    public WeatherClient getClient(Context ctx, DataManager dm) {
         if (client != null)
             return client;
 
         try {
+            settings = new SettingsRepositoryImp(ctx, dm);
             WeatherConfig config = new WeatherConfig();
             config.numDays = 10;
-            config.ApiKey = "62594feab4bdf0e78e2e04ab3944f1ca";
+            config.unitSystem = ((WeatherLibUnitSystem)settings.getCurrentUnitSystem()).unitSystemValue();
+            config.lang = settings.getCurrentLanguage();
+            config.ApiKey = ctx.getString(R.string.open_weather_map_api_key);
             client = new WeatherClient.ClientBuilder()
                     .attach(ctx)
                     .config(config)
@@ -45,5 +54,9 @@ public class WeatherContext {
         }
 
         return client;
+    }
+
+    public void invalidate() {
+        client = null;
     }
 }
