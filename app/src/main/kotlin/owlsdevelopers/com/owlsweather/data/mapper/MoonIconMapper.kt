@@ -1,7 +1,7 @@
 package owlsdevelopers.com.owlsweather.data.mapper
 
 import android.content.Context
-import owlsdevelopers.com.owlsweather.MoonPhase
+import owlsdevelopers.com.owlsweather.util.MoonPhase
 import owlsdevelopers.com.owlsweather.R
 import java.util.*
 

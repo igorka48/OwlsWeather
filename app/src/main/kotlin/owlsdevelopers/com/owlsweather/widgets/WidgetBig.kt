@@ -1,4 +1,4 @@
-package owlsdevelopers.com.owlsweather
+package owlsdevelopers.com.owlsweather.widgets
 
 import android.app.PendingIntent
 import android.app.Service
@@ -7,24 +7,19 @@ import android.appwidget.AppWidgetProvider
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
-import android.os.Handler
 import android.os.IBinder
 import android.preference.PreferenceManager
 import android.util.Log
 import android.view.View
 import android.widget.RemoteViews
+import owlsdevelopers.com.owlsweather.MainActivity
 
-import com.survivingwithandroid.weather.lib.model.DayForecast
+import owlsdevelopers.com.owlsweather.OwlsWeatherApplication
+import owlsdevelopers.com.owlsweather.R
 
-import java.io.IOException
-import java.io.InputStream
-import java.net.HttpURLConnection
-import java.net.URL
 import java.util.Arrays
 
-import owlsdevelopers.com.owlsweather.data.DataManager
-import owlsdevelopers.com.owlsweather.data.Town
+import owlsdevelopers.com.owlsweather.data.model.Town
 
 
 class WidgetBig : AppWidgetProvider() {
@@ -109,24 +104,6 @@ class WidgetBig : AppWidgetProvider() {
             if (town == null) return updateViews
             Log.d("Weather", "Widget. Town name: " + town.townName)
             updateWidgetUI(context, town, updateViews)
-            val fContext = context
-            val fTown = town
-
-
-            //			Rp5SiteParser parser = new Rp5SiteParser(context, town, languageCode, true);
-            //			parser.parse(new Rp5SiteParserCallBack() {
-            //
-            //				@Override
-            //				public void siteParsed() {
-            //					updateWidgetUI(fContext, fTown, updateViews);
-            //				}
-            //
-            //				@Override
-            //				public void error() {
-            //					//activityIndicator.setVisibility(View.INVISIBLE);
-            //
-            //				}
-            //			});
 
 
             return updateViews
@@ -194,21 +171,6 @@ class WidgetBig : AppWidgetProvider() {
 
         }
 
-        // Given a string representation of a URL, sets up a connection and gets
-        // an input stream.
-        @Throws(IOException::class)
-        private fun downloadUrl(urlString: String): InputStream {
-            val url = URL(urlString)
-            val conn = url.openConnection() as HttpURLConnection
-            conn.readTimeout = 10000
-            conn.connectTimeout = 15000
-            conn.requestMethod = "GET"
-            conn.doInput = true
-            // Starts the query
-            conn.connect()
-            val stream = conn.inputStream
-            return stream
-        }
     }
 
     companion object {

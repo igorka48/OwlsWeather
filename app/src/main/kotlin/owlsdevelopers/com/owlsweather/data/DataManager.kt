@@ -4,18 +4,17 @@ import android.content.Context
 import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.google.gson.annotations.Expose
+import owlsdevelopers.com.owlsweather.data.model.Town
 
 
 import java.io.File
 import java.io.PrintWriter
-import java.lang.reflect.Modifier
 
 
 class DataManager {
 
 
-    var weather: Weather? = null
+    //var weather: Weather? = null
 
 
     var townsMap: HashMap<String, Town> = HashMap()
@@ -31,7 +30,7 @@ class DataManager {
 
 
     init {
-        this.weather = null
+       // this.weather = null
     }
 
 //    val town: String

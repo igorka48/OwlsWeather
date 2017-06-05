@@ -7,8 +7,8 @@ import com.survivingwithandroid.weather.lib.model.BaseWeather
 import com.survivingwithandroid.weather.lib.model.DayForecast
 import com.survivingwithandroid.weather.lib.model.WeatherForecast
 import com.survivingwithandroid.weather.lib.util.WindDirection
-import owlsdevelopers.com.owlsweather.data.FU
-import owlsdevelopers.com.owlsweather.data.ui.WeatherTimestep
+import owlsdevelopers.com.owlsweather.util.FU
+import owlsdevelopers.com.owlsweather.ui.model.WeatherTimestep
 import java.util.*
 
 /**
@@ -36,7 +36,7 @@ class WeatherTimestampMapper {
         return timestamps;
     }
 
-    fun watherFromDay(context: Context, day: DayForecast/*, time: DayTimes*/, units: BaseWeather.WeatherUnit): WeatherTimestep{
+    fun watherFromDay(context: Context, day: DayForecast/*, time: DayTimes*/, units: BaseWeather.WeatherUnit): WeatherTimestep {
         val timestamp = WeatherTimestep()
         timestamp.timestep = day.timestamp * 1000
         timestamp.windVelocity = "%.1f ${units.speedUnit}".format(day.weather.wind.speed)

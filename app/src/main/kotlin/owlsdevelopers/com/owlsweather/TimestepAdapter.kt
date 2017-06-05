@@ -8,7 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.timestep_item.view.*
-import owlsdevelopers.com.owlsweather.data.ui.WeatherTimestep
+import owlsdevelopers.com.owlsweather.ui.model.WeatherTimestep
 
 
 class TimestepAdapter(val context: Context, data: List<WeatherTimestep>,

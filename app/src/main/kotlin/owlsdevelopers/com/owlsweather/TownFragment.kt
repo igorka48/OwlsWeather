@@ -26,11 +26,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import kotlinx.android.synthetic.main.fragment_town.*
-import owlsdevelopers.com.owlsweather.data.FU
 import java.util.*
 import android.support.v7.widget.LinearLayoutManager
 import android.widget.Toast
-import owlsdevelopers.com.owlsweather.data.ui.WeatherTimestep
+import owlsdevelopers.com.owlsweather.ui.model.WeatherTimestep
+import owlsdevelopers.com.owlsweather.util.FU
 
 
 class TownFragment : Fragment() {

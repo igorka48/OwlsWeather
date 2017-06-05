@@ -1,5 +1,6 @@
 package owlsdevelopers.com.owlsweather.data
 
+import owlsdevelopers.com.owlsweather.data.model.Town
 import owlsdevelopers.com.owlsweather.data.model.UnitSystem
 
 /**
@@ -15,7 +16,7 @@ interface SettingsRepository {
 
     fun getTowns():Array<Town>
 
-    fun getTownForWidgets():Town?
+    fun getTownForWidgets(): Town?
 
     fun setTownForWidgets(town: Town) : Boolean
 

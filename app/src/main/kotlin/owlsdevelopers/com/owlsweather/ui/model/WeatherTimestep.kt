@@ -1,4 +1,4 @@
-package owlsdevelopers.com.owlsweather.data.ui
+package owlsdevelopers.com.owlsweather.ui.model
 
 
 data class WeatherTimestep(var temperature: String = "0", var humidity: String = "0", var pressure: String = "", var windDirection: String = "") {

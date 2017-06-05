@@ -44,7 +44,7 @@ import com.survivingwithandroid.weather.lib.exception.LocationProviderNotFoundEx
 import com.survivingwithandroid.weather.lib.exception.WeatherLibException
 import com.survivingwithandroid.weather.lib.model.City
 import kotlinx.android.synthetic.main.search_location_activity.*
-import owlsdevelopers.com.owlsweather.data.Town
+import owlsdevelopers.com.owlsweather.data.model.Town
 import owlsdevelopers.com.owlsweather.weatherlib.CityAdapter
 import owlsdevelopers.com.owlsweather.weatherlib.WeatherContext
 import permissions.dispatcher.NeedsPermission

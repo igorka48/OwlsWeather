@@ -1,4 +1,4 @@
-package owlsdevelopers.com.owlsweather;
+package owlsdevelopers.com.owlsweather.util;
 
 import java.util.Calendar;
 import java.util.Date;

@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".HomeActivity"
+            android:name=".ui.HomeActivity"
             android:screenOrientation="portrait"
             android:label="@string/weather"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -36,10 +36,10 @@
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings"
-            android:parentActivityName=".HomeActivity">
+            android:parentActivityName=".ui.HomeActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="owlsdevelopers.com.owlsweather.HomeActivity" />
+                android:value="owlsdevelopers.com.owlsweather.ui.HomeActivity" />
         </activity>
 
         <receiver
@@ -61,7 +61,7 @@
         </receiver>
         <!--  -->
         <receiver
-            android:name=".WidgetBig"
+            android:name=".widgets.WidgetBig"
             android:label="@string/widget_name_big">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -76,7 +76,7 @@
         <service android:name=".WidgetSmall$UpdateService" />
 
         <!-- Service to perform web API queries -->
-        <service android:name=".WidgetBig$UpdateService" />
+        <service android:name=".widgets.WidgetBig$UpdateService" />
     </application>
 
 </manifest>

@@ -5,13 +5,14 @@ import android.appwidget.AppWidgetManager
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
-import android.support.v4.content.WakefulBroadcastReceiver
 import com.survivingwithandroid.weather.lib.WeatherClient
 import com.survivingwithandroid.weather.lib.exception.WeatherLibException
 import com.survivingwithandroid.weather.lib.model.WeatherForecast
 import com.survivingwithandroid.weather.lib.request.WeatherRequest
 import owlsdevelopers.com.owlsweather.data.mapper.WeatherTimestampMapper
 import owlsdevelopers.com.owlsweather.weatherlib.WeatherContext
+import owlsdevelopers.com.owlsweather.widgets.WidgetBig
+import owlsdevelopers.com.owlsweather.widgets.WidgetSmall
 
 /**
  * An [IntentService] subclass for handling asynchronous task requests in

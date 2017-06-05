@@ -2,6 +2,7 @@ package owlsdevelopers.com.owlsweather.data
 
 import android.content.Context
 import android.preference.PreferenceManager
+import owlsdevelopers.com.owlsweather.data.model.Town
 import owlsdevelopers.com.owlsweather.data.model.UnitSystem
 import owlsdevelopers.com.owlsweather.weatherlib.WeatherLibUnitSystem
 

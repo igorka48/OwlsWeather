@@ -1,4 +1,4 @@
-package owlsdevelopers.com.owlsweather.data
+package owlsdevelopers.com.owlsweather.util
 
 import java.text.SimpleDateFormat
 import java.util.Calendar

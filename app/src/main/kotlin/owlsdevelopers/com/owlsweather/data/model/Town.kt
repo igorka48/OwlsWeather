@@ -1,7 +1,7 @@
-package owlsdevelopers.com.owlsweather.data
+package owlsdevelopers.com.owlsweather.data.model
 
 import android.location.Location
-import owlsdevelopers.com.owlsweather.data.ui.WeatherTimestep
+import owlsdevelopers.com.owlsweather.ui.model.WeatherTimestep
 
 data class Town(var townName: String = "",
                 var title: String = "",
