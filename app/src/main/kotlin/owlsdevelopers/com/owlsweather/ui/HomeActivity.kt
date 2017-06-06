@@ -117,7 +117,8 @@ class HomeActivity : AppCompatActivity() {
                 return true
             }
             R.id.refresh -> {
-                WeatherRcvService.loadWeather(this, data.towns[selectedPage].townCode, true)
+                if(!data.towns.isEmpty())
+                    WeatherRcvService.loadWeather(this, data.towns[selectedPage].townCode, true)
                 return true
             }
             R.id.about -> {
