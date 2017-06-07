@@ -14,8 +14,6 @@ import java.io.PrintWriter
 class DataManager {
 
 
-    //var weather: Weather? = null
-
 
     var townsMap: HashMap<String, Town> = HashMap()
 
@@ -28,15 +26,6 @@ class DataManager {
 
     @Transient val gson: Gson = GsonBuilder().create()
 
-
-    init {
-       // this.weather = null
-    }
-
-//    val town: String
-//        get() {
-//            return this.weather?.point?.point_name ?: ""
-//        }
 
 
     fun getTownByCode(code: String): Town? {

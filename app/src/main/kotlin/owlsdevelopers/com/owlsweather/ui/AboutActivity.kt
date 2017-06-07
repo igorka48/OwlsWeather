@@ -11,7 +11,7 @@ class AboutActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val view = AboutBuilder.with(this)
-                .setPhoto(R.mipmap.ic_launcher_round)
+                .setPhoto(R.mipmap.ic_launcher_circle)
                 .setCover(R.mipmap.profile_cover)
                 .setName(R.string.app_name)
                 .setSubTitle("Owls Developers")
