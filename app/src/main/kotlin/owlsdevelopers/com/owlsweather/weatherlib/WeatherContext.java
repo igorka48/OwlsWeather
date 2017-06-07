@@ -13,8 +13,8 @@ import com.survivingwithandroid.weather.lib.provider.openweathermap.Openweatherm
 
 import owlsdevelopers.com.owlsweather.R;
 import owlsdevelopers.com.owlsweather.data.DataManager;
-import owlsdevelopers.com.owlsweather.data.SettingsRepository;
-import owlsdevelopers.com.owlsweather.data.SettingsRepositoryImp;
+import owlsdevelopers.com.owlsweather.ui.repository.SettingsRepository;
+import owlsdevelopers.com.owlsweather.data.repository.SettingsRepositoryImp;
 
 
 public class WeatherContext {

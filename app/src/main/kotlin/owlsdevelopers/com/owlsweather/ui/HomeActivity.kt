@@ -13,6 +13,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import com.google.android.gms.ads.AdRequest
 import kotlinx.android.synthetic.main.activity_home.*
 import owlsdevelopers.com.owlsweather.OwlsWeatherApplication
 import owlsdevelopers.com.owlsweather.R
@@ -60,11 +61,7 @@ class HomeActivity : AppCompatActivity() {
         )
 
         addTownView.visibility = GONE
-
-//        fab.setOnClickListener({ view ->
-//            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                    .setAction("Action", null).show()
-//        })
+        initAds()
 
     }
 
@@ -76,6 +73,12 @@ class HomeActivity : AppCompatActivity() {
         viewPager?.adapter = mSectionsPagerAdapter
         if(data.towns.isNotEmpty())
             WeatherRcvService.loadWeather(this, data.towns[0].townCode, false)
+    }
+
+
+    fun initAds(){
+        val adRequest =  AdRequest.Builder().build()
+        adView.loadAd(adRequest)
     }
 
 

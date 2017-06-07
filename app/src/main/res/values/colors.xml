@@ -13,7 +13,7 @@
 
 
 
-
+    <color name="background_timestep">#ffdffcff</color>
     <color name="day_block">#ccd4d9</color>
     <color name="day_block_selected">#aa30addc</color>
     <color name="night_block">#aa0b416e</color>

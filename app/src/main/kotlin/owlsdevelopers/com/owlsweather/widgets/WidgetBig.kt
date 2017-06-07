@@ -20,6 +20,7 @@ import java.util.Arrays
 
 import owlsdevelopers.com.owlsweather.data.model.Town
 import owlsdevelopers.com.owlsweather.ui.MainActivity
+import owlsdevelopers.com.owlsweather.ui.repository.WeatherRepository
 
 
 class WidgetBig : AppWidgetProvider() {
@@ -76,6 +77,8 @@ class WidgetBig : AppWidgetProvider() {
             val intent = Intent(context, MainActivity::class.java)
             val pendingIntent = PendingIntent.getActivity(context, 0,
                     intent, 0)
+
+            val weatherRepository: WeatherRepository
 
             val updateViews = RemoteViews(
                     context.packageName, R.layout.widget_big)

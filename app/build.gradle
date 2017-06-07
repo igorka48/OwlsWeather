@@ -15,9 +15,18 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
+    signingConfigs {
+        release {
+            storeFile file("../my-release-key.keystore")
+            storePassword "key123"
+            keyAlias "alias_name"
+            keyPassword "key123"
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -45,10 +54,11 @@ dependencies {
 
     compile "com.github.hotchemi:permissionsdispatcher:$permissionsdispatcher_version"
     kapt "com.github.hotchemi:permissionsdispatcher-processor:$permissionsdispatcher_version"
+
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.luckycatlabs:SunriseSunsetCalculator:1.2'
     compile 'com.github.jrvansuita:MaterialAbout:0.1.5'
-
+    compile 'com.google.firebase:firebase-ads:10.0.1'
 }
 repositories {
     mavenCentral()
@@ -56,3 +66,5 @@ repositories {
 
 }
 
+
+apply plugin: 'com.google.gms.google-services'

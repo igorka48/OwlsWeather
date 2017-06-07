@@ -1,4 +1,4 @@
-package owlsdevelopers.com.owlsweather.data
+package owlsdevelopers.com.owlsweather.ui.repository
 
 import owlsdevelopers.com.owlsweather.data.model.Town
 import owlsdevelopers.com.owlsweather.data.model.UnitSystem
@@ -22,7 +22,7 @@ interface SettingsRepository {
 
     fun getUnitSystemVariants():Array<UnitSystem>
 
-    fun getCurrentUnitSystem():UnitSystem
+    fun getCurrentUnitSystem(): UnitSystem
 
     fun setCurrentUnitSystem(system: UnitSystem) : Boolean
 }

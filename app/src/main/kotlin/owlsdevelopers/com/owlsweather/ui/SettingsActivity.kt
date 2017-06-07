@@ -8,7 +8,7 @@ import kotlinx.android.synthetic.main.activity_settings.*
 import android.widget.ArrayAdapter
 import owlsdevelopers.com.owlsweather.OwlsWeatherApplication
 import owlsdevelopers.com.owlsweather.R
-import owlsdevelopers.com.owlsweather.data.SettingsRepositoryImp
+import owlsdevelopers.com.owlsweather.data.repository.SettingsRepositoryImp
 import owlsdevelopers.com.owlsweather.data.model.Town
 import owlsdevelopers.com.owlsweather.data.model.UnitSystem
 import owlsdevelopers.com.owlsweather.weatherlib.WeatherContext
