@@ -18,9 +18,9 @@ import owlsdevelopers.com.owlsweather.R
 
 import java.util.Arrays
 
-import owlsdevelopers.com.owlsweather.data.model.Town
+import owlsdevelopers.com.owlsweather.ui.model.Town
 import owlsdevelopers.com.owlsweather.ui.MainActivity
-import owlsdevelopers.com.owlsweather.ui.repository.WeatherRepository
+import owlsdevelopers.com.owlsweather.ui.repository.TownsRepositoryImp
 
 
 class WidgetBig : AppWidgetProvider() {
@@ -77,8 +77,9 @@ class WidgetBig : AppWidgetProvider() {
             val intent = Intent(context, MainActivity::class.java)
             val pendingIntent = PendingIntent.getActivity(context, 0,
                     intent, 0)
-
-            val weatherRepository: WeatherRepository
+            val data = (context
+                    .applicationContext as OwlsWeatherApplication).dataManager
+            val townsRepository = TownsRepositoryImp(data)
 
             val updateViews = RemoteViews(
                     context.packageName, R.layout.widget_big)
@@ -93,16 +94,15 @@ class WidgetBig : AppWidgetProvider() {
             Log.d("Weather", "Widget. Town code: " + townCode!!)
 
 
-            val dm = (context
-                    .applicationContext as OwlsWeatherApplication).dataManager
+
 
             var town: Town? = null
             if ("".equals(townCode, ignoreCase = true)) {
-                if (dm.towns.size > 0) {
-                    town = dm.towns[0]
+                if (townsRepository.getTowns().isNotEmpty()) {
+                    town = townsRepository.getTowns()[0]
                 }
             } else {
-                town = dm.getTownByCode(townCode)
+                town = townsRepository.getTownByCode(townCode)
             }
             if (town == null) return updateViews
             Log.d("Weather", "Widget. Town name: " + town.townName)

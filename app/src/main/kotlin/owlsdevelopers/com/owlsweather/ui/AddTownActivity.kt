@@ -1,32 +1,3 @@
-/*
- * Copyright (C) 2014 Francesco Azzola
- *  Surviving with Android (http://www.survivingwithandroid.com)
- *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
- */
-
-/**
- * This is a tutorial source code
- * provided "as is" and without warranties.
- *
- *
- * For any question please visit the web site
- * http://www.survivingwithandroid.com
- *
- *
- * or write an email to
- * survivingwithandroid@gmail.com
- */
 package owlsdevelopers.com.owlsweather.ui
 
 
@@ -46,7 +17,9 @@ import com.survivingwithandroid.weather.lib.model.City
 import kotlinx.android.synthetic.main.search_location_activity.*
 import owlsdevelopers.com.owlsweather.OwlsWeatherApplication
 import owlsdevelopers.com.owlsweather.R
-import owlsdevelopers.com.owlsweather.data.model.Town
+import owlsdevelopers.com.owlsweather.ui.model.Town
+import owlsdevelopers.com.owlsweather.ui.repository.TownsRepository
+import owlsdevelopers.com.owlsweather.ui.repository.TownsRepositoryImp
 import owlsdevelopers.com.owlsweather.weatherlib.CityAdapter
 import owlsdevelopers.com.owlsweather.weatherlib.WeatherContext
 import permissions.dispatcher.NeedsPermission
@@ -54,26 +27,22 @@ import permissions.dispatcher.RuntimePermissions
 import java.util.*
 
 
-/**
- * @author Francesco
- */
 @RuntimePermissions
 class AddTownActivity : Activity() {
 
 
     private var adp: CityAdapter? = null
     private var client: WeatherClient? = null
+    private var townsRepository: TownsRepository? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.search_location_activity)
         val data = (applicationContext as OwlsWeatherApplication).dataManager
+        townsRepository = TownsRepositoryImp(data)
+
         client = WeatherContext.getInstance().getClient(this, data)
 
-       // Log.d("App", "Client [$client]")
-
-        //cityList = findViewById(R.id.cityList) as ListView
-        //bar = findViewById(R.id.progressBar2) as ProgressBar
         adp = CityAdapter(this, ArrayList<City>())
         cityList?.adapter = adp
 
@@ -100,16 +69,16 @@ class AddTownActivity : Activity() {
             editor.commit()
 
             val dm = (applicationContext as OwlsWeatherApplication).dataManager
-            Log.d("Weather", "Towns count: " + dm.towns.size)
+            Log.d("Weather", "Towns count: " + townsRepository?.getTowns()?.size)
             val town = Town(townName = city.name, townCode = city.id)
             town.title = city.name
-            dm.addTown(town, true)
+            townsRepository?.addTown(town, true)
             dm.save(this)
 
            // Log.d("Weather", "Town added: " + city.id)
            // Log.d("Weather", "Towns count: " + dm.towns.size)
 
-            if (dm.towns.size == 1) {
+            if (townsRepository?.getTowns()?.size == 1) {
                 editor.putString("widgetTownCodePref", "" + city.id)
                 editor.commit()
             }

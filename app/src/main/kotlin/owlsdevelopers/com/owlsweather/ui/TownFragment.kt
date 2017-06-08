@@ -34,6 +34,8 @@ import owlsdevelopers.com.owlsweather.R
 import owlsdevelopers.com.owlsweather.WeatherBroadcastReceiver
 import owlsdevelopers.com.owlsweather.WeatherRcvService
 import owlsdevelopers.com.owlsweather.ui.model.WeatherTimestep
+import owlsdevelopers.com.owlsweather.ui.repository.TownsRepository
+import owlsdevelopers.com.owlsweather.ui.repository.TownsRepositoryImp
 import owlsdevelopers.com.owlsweather.util.FU
 
 
@@ -56,7 +58,6 @@ class TownFragment : Fragment() {
     var broadcastReceiver: WeatherBroadcastReceiver? = null
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         pageNumber = arguments.getInt(ARG_PAGE)
@@ -71,6 +72,9 @@ class TownFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        val data = (context
+                .applicationContext as OwlsWeatherApplication).dataManager
+        val townsRepository = TownsRepositoryImp(data)
 
         val adapter: TimestepAdapter = TimestepAdapter(context, ArrayList<WeatherTimestep>(), object : TimestepAdapter.TimestepClickListener {
             override fun itemClicked(i: Int) {
@@ -91,12 +95,11 @@ class TownFragment : Fragment() {
 
             override fun loadingCompleted() {
                 progressBar.visibility = View.GONE
-                val dm = (context
-                        .applicationContext as OwlsWeatherApplication).dataManager
-                if (pageNumber >= dm.towns.size) {
+
+                if (pageNumber >= townsRepository.getTowns().size) {
                     return
                 }
-                val town = dm.towns[pageNumber]
+                val town = townsRepository.getTowns()[pageNumber]
                 adapter.data = town.forecast
             }
 
@@ -131,12 +134,14 @@ class TownFragment : Fragment() {
 
 
     fun updateWebTimestepView(timestep: Int) {
-        val dm = (context
+        val data = (context
                 .applicationContext as OwlsWeatherApplication).dataManager
-        if (pageNumber >= dm.towns.size) {
+        val townsRepository = TownsRepositoryImp(data)
+
+        if (pageNumber >= townsRepository.getTowns().size) {
             return
         }
-        val town = dm.towns[pageNumber]
+        val town = townsRepository.getTowns()[pageNumber]
 
 
         townTitle.text = town.title
@@ -195,8 +200,9 @@ class TownFragment : Fragment() {
     }
 
     fun loadWeather() {
-        val dm = (context.applicationContext.applicationContext as OwlsWeatherApplication).dataManager
-        val town = dm.towns[pageNumber]
+        val data = (context.applicationContext.applicationContext as OwlsWeatherApplication).dataManager
+        val townsRepository = TownsRepositoryImp(data)
+        val town = townsRepository.getTowns()[pageNumber]
         WeatherRcvService.loadWeather(context, town.townCode, false)
     }
 

@@ -1,4 +1,4 @@
-package owlsdevelopers.com.owlsweather.data.model
+package owlsdevelopers.com.owlsweather.ui.model
 
 /**
  * Created by igorka on 6/5/17.

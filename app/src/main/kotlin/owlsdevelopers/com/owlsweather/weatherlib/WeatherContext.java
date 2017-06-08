@@ -36,7 +36,7 @@ public class WeatherContext {
             return client;
 
         try {
-            settings = new SettingsRepositoryImp(ctx, dm);
+            settings = new SettingsRepositoryImp(ctx, null);
             WeatherConfig config = new WeatherConfig();
             config.numDays = 10;
             config.unitSystem = ((WeatherLibUnitSystem)settings.getCurrentUnitSystem()).unitSystemValue();

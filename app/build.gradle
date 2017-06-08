@@ -10,7 +10,7 @@ android {
         applicationId "owlsdevelopers.com.owlsweather"
         minSdkVersion 17
         targetSdkVersion 25
-        versionCode 17
+        versionCode 1
         versionName "2.99"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
@@ -22,6 +22,12 @@ android {
             keyAlias "alias_name"
             keyPassword "key123"
         }
+    }
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
     }
     buildTypes {
         release {

@@ -4,7 +4,7 @@ import android.content.Context
 import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import owlsdevelopers.com.owlsweather.data.model.Town
+import owlsdevelopers.com.owlsweather.ui.model.Town
 
 
 import java.io.File
@@ -18,7 +18,7 @@ class DataManager {
     var townsMap: HashMap<String, Town> = HashMap()
 
 
-    val towns: Array<Town>
+    private val towns: Array<Town>
         get() {
             return townsMap.values.toTypedArray()
         }
@@ -28,21 +28,21 @@ class DataManager {
 
 
 
-    fun getTownByCode(code: String): Town? {
+    private fun getTownByCode(code: String): Town? {
         return townsMap[code]
     }
 
-    fun addTown(town: Town, checkUnique: Boolean) {
+    private fun addTown(town: Town, checkUnique: Boolean) {
         townsMap.put(town.townCode, town)
     }
 
 
-    fun removeTown(townCode: String) {
+    private fun removeTown(townCode: String) {
         if (townsMap.containsKey(townCode))
             townsMap.remove(townCode)
     }
 
-    fun removeTown(townIndex: Int) {
+    private fun removeTown(townIndex: Int) {
         if (towns.size > townIndex)
             townsMap.remove(towns[townIndex].townCode)
     }
@@ -84,8 +84,5 @@ class DataManager {
 
     }
 
-    fun invalidate() {
-        towns.forEach { t -> t.lastUpdateTimestamp = 0}
-    }
 
 }

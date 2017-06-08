@@ -3,15 +3,16 @@ package owlsdevelopers.com.owlsweather.data.repository
 import android.content.Context
 import android.preference.PreferenceManager
 import owlsdevelopers.com.owlsweather.data.DataManager
-import owlsdevelopers.com.owlsweather.data.model.Town
-import owlsdevelopers.com.owlsweather.data.model.UnitSystem
+import owlsdevelopers.com.owlsweather.ui.model.Town
+import owlsdevelopers.com.owlsweather.ui.model.UnitSystem
 import owlsdevelopers.com.owlsweather.ui.repository.SettingsRepository
+import owlsdevelopers.com.owlsweather.ui.repository.TownsRepository
 import owlsdevelopers.com.owlsweather.weatherlib.WeatherLibUnitSystem
 
 /**
  * Created by igorka on 6/3/17.
  */
-class SettingsRepositoryImp(val context: Context, val dataManager: DataManager) : SettingsRepository {
+class SettingsRepositoryImp(val context: Context, val townsRepository: TownsRepository?) : SettingsRepository {
     override fun getLanguageVariants(): Array<String> {
         return arrayOf("ru", "en", "de", "uk", "es", "fr")
     }
@@ -37,7 +38,7 @@ class SettingsRepositoryImp(val context: Context, val dataManager: DataManager) 
     }
 
     override fun getTowns(): Array<Town> {
-        return dataManager.towns
+        return townsRepository?.getTowns() ?: arrayOf<Town>()
     }
 
     override fun getTownForWidgets(): Town? {
@@ -45,7 +46,7 @@ class SettingsRepositoryImp(val context: Context, val dataManager: DataManager) 
                 .getDefaultSharedPreferences(context)
         val townId = sharedPrefs.getString(TOWN_PREF_KEY, "")
         if (townId.isEmpty())return null
-        return dataManager.getTownByCode(townId)
+        return townsRepository?.getTownByCode(townId)
     }
 
     override fun setTownForWidgets(town: Town): Boolean {

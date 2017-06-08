@@ -10,6 +10,7 @@ import com.survivingwithandroid.weather.lib.exception.WeatherLibException
 import com.survivingwithandroid.weather.lib.model.WeatherForecast
 import com.survivingwithandroid.weather.lib.request.WeatherRequest
 import owlsdevelopers.com.owlsweather.data.mapper.WeatherTimestampMapper
+import owlsdevelopers.com.owlsweather.ui.repository.TownsRepositoryImp
 import owlsdevelopers.com.owlsweather.weatherlib.WeatherContext
 import owlsdevelopers.com.owlsweather.widgets.WidgetBig
 import owlsdevelopers.com.owlsweather.widgets.WidgetSmall
@@ -49,7 +50,8 @@ class WeatherRcvService : IntentService("WeatherRcvService") {
     private fun loadWeatherCall(cityId: String, forceUpdate: Boolean) {
 
         val data = (this@WeatherRcvService.applicationContext as OwlsWeatherApplication).dataManager
-        val town = data.getTownByCode(cityId)
+        val townsRepository = TownsRepositoryImp(data)
+        val town = townsRepository.getTownByCode(cityId)
         if(town == null){
             WeatherBroadcastReceiver.sendLoadingCompleted(this@WeatherRcvService)
             return

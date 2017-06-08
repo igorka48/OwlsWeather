@@ -1,7 +1,7 @@
 package owlsdevelopers.com.owlsweather.ui.repository
 
-import owlsdevelopers.com.owlsweather.data.model.Town
-import owlsdevelopers.com.owlsweather.data.model.UnitSystem
+import owlsdevelopers.com.owlsweather.ui.model.Town
+import owlsdevelopers.com.owlsweather.ui.model.UnitSystem
 
 /**
  * Created by igorka on 6/3/17.

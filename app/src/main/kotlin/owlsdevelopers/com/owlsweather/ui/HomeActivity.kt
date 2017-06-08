@@ -19,12 +19,15 @@ import owlsdevelopers.com.owlsweather.OwlsWeatherApplication
 import owlsdevelopers.com.owlsweather.R
 import owlsdevelopers.com.owlsweather.WeatherRcvService
 import owlsdevelopers.com.owlsweather.data.DataManager
+import owlsdevelopers.com.owlsweather.ui.repository.TownsRepository
+import owlsdevelopers.com.owlsweather.ui.repository.TownsRepositoryImp
 
 class HomeActivity : AppCompatActivity() {
 
 
-     lateinit var data: DataManager
-     var selectedPage = 0
+    lateinit var townsRepository: TownsRepository
+
+    var selectedPage = 0
 
     /**
      * The [android.support.v4.view.PagerAdapter] that will provide
@@ -42,7 +45,8 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        data = (applicationContext as OwlsWeatherApplication).dataManager
+        val data = (applicationContext as OwlsWeatherApplication).dataManager
+        townsRepository = TownsRepositoryImp(data)
         setContentView(R.layout.activity_home)
         setSupportActionBar(toolbar)
         // Create the adapter that will return a fragment for each of the three
@@ -71,8 +75,8 @@ class HomeActivity : AppCompatActivity() {
         mSectionsPagerAdapter = SectionsPagerAdapter(supportFragmentManager)
         // Set up the ViewPager with the sections adapter.
         viewPager?.adapter = mSectionsPagerAdapter
-        if(data.towns.isNotEmpty())
-            WeatherRcvService.loadWeather(this, data.towns[0].townCode, false)
+        if(townsRepository.getTowns().isNotEmpty())
+            WeatherRcvService.loadWeather(this, townsRepository.getTowns()[0].townCode, false)
     }
 
 
@@ -105,7 +109,7 @@ class HomeActivity : AppCompatActivity() {
             R.id.remove -> {
                 val dm = (applicationContext as OwlsWeatherApplication).dataManager
                 try {
-                    dm.removeTown(selectedPage)
+                    townsRepository.removeTown(selectedPage)
                     dm.save(this)
 
                     mSectionsPagerAdapter = SectionsPagerAdapter(supportFragmentManager)
@@ -120,8 +124,8 @@ class HomeActivity : AppCompatActivity() {
                 return true
             }
             R.id.refresh -> {
-                if(!data.towns.isEmpty())
-                    WeatherRcvService.loadWeather(this, data.towns[selectedPage].townCode, true)
+                if(!townsRepository.getTowns().isEmpty())
+                    WeatherRcvService.loadWeather(this, townsRepository.getTowns()[selectedPage].townCode, true)
                 return true
             }
             R.id.about -> {
@@ -157,12 +161,12 @@ class HomeActivity : AppCompatActivity() {
         }
 
         override fun getCount(): Int {
-            if(data.towns.isEmpty()){
+            if(townsRepository.getTowns().isEmpty()){
                 addTownView.visibility = VISIBLE
             } else {
                 addTownView.visibility = GONE
             }
-            return data.towns.size
+            return townsRepository.getTowns().size
         }
 
     }

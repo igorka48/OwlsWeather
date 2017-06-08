@@ -1,8 +1,10 @@
 package owlsdevelopers.com.owlsweather.widgets
 
+import owlsdevelopers.com.owlsweather.OwlsWeatherApplication
 import owlsdevelopers.com.owlsweather.R
-import owlsdevelopers.com.owlsweather.data.model.Town
+import owlsdevelopers.com.owlsweather.ui.model.Town
 import owlsdevelopers.com.owlsweather.ui.HomeActivity
+import owlsdevelopers.com.owlsweather.ui.repository.TownsRepositoryImp
 
 
 class WidgetSmall : android.appwidget.AppWidgetProvider() {
@@ -77,16 +79,16 @@ class WidgetSmall : android.appwidget.AppWidgetProvider() {
             android.util.Log.d("Weather", "Widget. Town code: " + townCode!!)
 
 
-            val dm = (context
-                    .applicationContext as owlsdevelopers.com.owlsweather.OwlsWeatherApplication).dataManager
-
+            val data = (context
+                    .applicationContext as OwlsWeatherApplication).dataManager
+            val townsRepository = TownsRepositoryImp(data)
             var town: Town? = null
             if ("".equals(townCode, ignoreCase = true)) {
-                if (dm.towns.size > 0) {
-                    town = dm.towns[0]
+                if (townsRepository.getTowns().isNotEmpty()) {
+                    town = townsRepository.getTowns()[0]
                 }
             } else {
-                town = dm.getTownByCode(townCode)
+                town = townsRepository.getTownByCode(townCode)
             }
             if (town == null) return updateViews
             android.util.Log.d("Weather", "Widget. Town name: " + town.townName)
