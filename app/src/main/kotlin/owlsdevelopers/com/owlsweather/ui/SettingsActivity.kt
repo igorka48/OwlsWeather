@@ -15,26 +15,28 @@ import owlsdevelopers.com.owlsweather.ui.repository.SettingsRepository
 import owlsdevelopers.com.owlsweather.ui.repository.TownsRepository
 import owlsdevelopers.com.owlsweather.ui.repository.TownsRepositoryImp
 import owlsdevelopers.com.owlsweather.weatherlib.WeatherContext
+import javax.inject.Inject
 
 
 class SettingsActivity : AppCompatActivity() {
 
+    @Inject
     lateinit var settingsRepository: SettingsRepository
+    @Inject
     lateinit var townsRepository: TownsRepository
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        //Needs di
-        val data = (applicationContext as OwlsWeatherApplication).dataManager
-        townsRepository = TownsRepositoryImp(data)
-        settingsRepository = SettingsRepositoryImp(this, townsRepository)
+        injectDepedency()
 
         setContentView(R.layout.activity_settings)
         initSpinners()
     }
-
+    fun injectDepedency(){
+        (applicationContext as OwlsWeatherApplication).applicationComponent?.inject(this)
+    }
     fun initSpinners() {
 
 

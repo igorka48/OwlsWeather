@@ -33,10 +33,12 @@ import owlsdevelopers.com.owlsweather.OwlsWeatherApplication
 import owlsdevelopers.com.owlsweather.R
 import owlsdevelopers.com.owlsweather.WeatherBroadcastReceiver
 import owlsdevelopers.com.owlsweather.WeatherRcvService
+import owlsdevelopers.com.owlsweather.data.DataManager
 import owlsdevelopers.com.owlsweather.ui.model.WeatherTimestep
 import owlsdevelopers.com.owlsweather.ui.repository.TownsRepository
 import owlsdevelopers.com.owlsweather.ui.repository.TownsRepositoryImp
 import owlsdevelopers.com.owlsweather.util.FU
+import javax.inject.Inject
 
 
 class TownFragment : Fragment() {
@@ -57,10 +59,21 @@ class TownFragment : Fragment() {
     var forceUpdate: Boolean = false
     var broadcastReceiver: WeatherBroadcastReceiver? = null
 
+    @Inject
+    lateinit var data: DataManager
+
+    @Inject
+    lateinit var townsRepository: TownsRepository
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         pageNumber = arguments.getInt(ARG_PAGE)
+        injectDepedency()
+    }
+
+    fun injectDepedency(){
+        (context.applicationContext as OwlsWeatherApplication).applicationComponent?.inject(this)
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
@@ -72,11 +85,7 @@ class TownFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-        val data = (context
-                .applicationContext as OwlsWeatherApplication).dataManager
-        val townsRepository = TownsRepositoryImp(data)
-
-        val adapter: TimestepAdapter = TimestepAdapter(context, ArrayList<WeatherTimestep>(), object : TimestepAdapter.TimestepClickListener {
+        val adapter: TimestepAdapter = TimestepAdapter(context, arrayOf<WeatherTimestep>(), object : TimestepAdapter.TimestepClickListener {
             override fun itemClicked(i: Int) {
                 updateWebTimestepView(i)
             }
@@ -134,10 +143,6 @@ class TownFragment : Fragment() {
 
 
     fun updateWebTimestepView(timestep: Int) {
-        val data = (context
-                .applicationContext as OwlsWeatherApplication).dataManager
-        val townsRepository = TownsRepositoryImp(data)
-
         if (pageNumber >= townsRepository.getTowns().size) {
             return
         }
@@ -200,8 +205,6 @@ class TownFragment : Fragment() {
     }
 
     fun loadWeather() {
-        val data = (context.applicationContext.applicationContext as OwlsWeatherApplication).dataManager
-        val townsRepository = TownsRepositoryImp(data)
         val town = townsRepository.getTowns()[pageNumber]
         WeatherRcvService.loadWeather(context, town.townCode, false)
     }

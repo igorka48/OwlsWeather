@@ -9,11 +9,13 @@ import com.survivingwithandroid.weather.lib.WeatherClient
 import com.survivingwithandroid.weather.lib.exception.WeatherLibException
 import com.survivingwithandroid.weather.lib.model.WeatherForecast
 import com.survivingwithandroid.weather.lib.request.WeatherRequest
+import owlsdevelopers.com.owlsweather.data.DataManager
 import owlsdevelopers.com.owlsweather.data.mapper.WeatherTimestampMapper
-import owlsdevelopers.com.owlsweather.ui.repository.TownsRepositoryImp
+import owlsdevelopers.com.owlsweather.ui.repository.TownsRepository
 import owlsdevelopers.com.owlsweather.weatherlib.WeatherContext
 import owlsdevelopers.com.owlsweather.widgets.WidgetBig
 import owlsdevelopers.com.owlsweather.widgets.WidgetSmall
+import javax.inject.Inject
 
 /**
  * An [IntentService] subclass for handling asynchronous task requests in
@@ -26,15 +28,22 @@ import owlsdevelopers.com.owlsweather.widgets.WidgetSmall
 class WeatherRcvService : IntentService("WeatherRcvService") {
 
 
-    private var _weatherClient: WeatherClient? = null
+    @Inject
+    lateinit var data: DataManager
+    @Inject
+    lateinit var townsRepository: TownsRepository
+    @Inject
+    lateinit var weatherClient: WeatherClient
+
+    override fun onCreate() {
+        super.onCreate()
+        injectDepedency()
+    }
 
 
-    val weatherClient: WeatherClient
-        get() {
-            val data = (applicationContext as OwlsWeatherApplication).dataManager
-            return _weatherClient ?: WeatherContext.getInstance().getClient(this, data)
-        }
-
+    fun injectDepedency() {
+        (applicationContext as OwlsWeatherApplication).applicationComponent?.inject(this)
+    }
 
     override fun onHandleIntent(intent: Intent?) {
         if (intent != null) {
@@ -49,16 +58,14 @@ class WeatherRcvService : IntentService("WeatherRcvService") {
 
     private fun loadWeatherCall(cityId: String, forceUpdate: Boolean) {
 
-        val data = (this@WeatherRcvService.applicationContext as OwlsWeatherApplication).dataManager
-        val townsRepository = TownsRepositoryImp(data)
         val town = townsRepository.getTownByCode(cityId)
-        if(town == null){
+        if (town == null) {
             WeatherBroadcastReceiver.sendLoadingCompleted(this@WeatherRcvService)
             return
         }
 
-        if(!forceUpdate){
-            if(System.currentTimeMillis() - town.lastUpdateTimestamp < WEATHER_CACHE_TIME){
+        if (!forceUpdate) {
+            if (System.currentTimeMillis() - town.lastUpdateTimestamp < WEATHER_CACHE_TIME) {
                 WeatherBroadcastReceiver.sendLoadingCompleted(this@WeatherRcvService)
                 return
             }

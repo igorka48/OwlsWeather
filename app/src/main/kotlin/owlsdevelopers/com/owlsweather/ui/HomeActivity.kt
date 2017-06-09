@@ -21,10 +21,14 @@ import owlsdevelopers.com.owlsweather.WeatherRcvService
 import owlsdevelopers.com.owlsweather.data.DataManager
 import owlsdevelopers.com.owlsweather.ui.repository.TownsRepository
 import owlsdevelopers.com.owlsweather.ui.repository.TownsRepositoryImp
+import javax.inject.Inject
 
 class HomeActivity : AppCompatActivity() {
 
 
+    @Inject
+    lateinit var data: DataManager
+    @Inject
     lateinit var townsRepository: TownsRepository
 
     var selectedPage = 0
@@ -45,8 +49,7 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val data = (applicationContext as OwlsWeatherApplication).dataManager
-        townsRepository = TownsRepositoryImp(data)
+        injectDepedency()
         setContentView(R.layout.activity_home)
         setSupportActionBar(toolbar)
         // Create the adapter that will return a fragment for each of the three
@@ -67,6 +70,9 @@ class HomeActivity : AppCompatActivity() {
         addTownView.visibility = GONE
         initAds()
 
+    }
+    fun injectDepedency(){
+        (applicationContext as OwlsWeatherApplication).applicationComponent?.inject(this)
     }
 
     override fun onResume() {
@@ -107,10 +113,9 @@ class HomeActivity : AppCompatActivity() {
                 return true
             }
             R.id.remove -> {
-                val dm = (applicationContext as OwlsWeatherApplication).dataManager
                 try {
                     townsRepository.removeTown(selectedPage)
-                    dm.save(this)
+                    data.save(this)
 
                     mSectionsPagerAdapter = SectionsPagerAdapter(supportFragmentManager)
                     // Set up the ViewPager with the sections adapter.

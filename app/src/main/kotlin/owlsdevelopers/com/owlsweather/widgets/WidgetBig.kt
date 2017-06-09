@@ -15,12 +15,15 @@ import android.widget.RemoteViews
 
 import owlsdevelopers.com.owlsweather.OwlsWeatherApplication
 import owlsdevelopers.com.owlsweather.R
+import owlsdevelopers.com.owlsweather.data.DataManager
 
 import java.util.Arrays
 
 import owlsdevelopers.com.owlsweather.ui.model.Town
 import owlsdevelopers.com.owlsweather.ui.MainActivity
+import owlsdevelopers.com.owlsweather.ui.repository.TownsRepository
 import owlsdevelopers.com.owlsweather.ui.repository.TownsRepositoryImp
+import javax.inject.Inject
 
 
 class WidgetBig : AppWidgetProvider() {
@@ -58,18 +61,30 @@ class WidgetBig : AppWidgetProvider() {
     }
 
     class UpdateService : Service() {
-
+        @Inject
+        lateinit var data: DataManager
+        @Inject
+        lateinit var townsRepository: TownsRepository
         //internal var handler: Handler
 
         override fun onStart(intent: Intent, startId: Int) {
             // Build the widget update for today
-
             val updateViews = buildUpdate(this)
 
             // Push update for this widget to the home screen
             val thisWidget = ComponentName(this, WidgetBig::class.java)
             val manager = AppWidgetManager.getInstance(this)
             manager.updateAppWidget(thisWidget, updateViews)
+        }
+
+        override fun onCreate() {
+            super.onCreate()
+            injectDepedency()
+        }
+
+
+        fun injectDepedency(){
+            (applicationContext as OwlsWeatherApplication).applicationComponent?.inject(this)
         }
 
         fun buildUpdate(context: Context): RemoteViews {

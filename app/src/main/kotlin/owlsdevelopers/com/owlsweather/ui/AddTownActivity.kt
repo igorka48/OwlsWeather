@@ -17,6 +17,7 @@ import com.survivingwithandroid.weather.lib.model.City
 import kotlinx.android.synthetic.main.search_location_activity.*
 import owlsdevelopers.com.owlsweather.OwlsWeatherApplication
 import owlsdevelopers.com.owlsweather.R
+import owlsdevelopers.com.owlsweather.data.DataManager
 import owlsdevelopers.com.owlsweather.ui.model.Town
 import owlsdevelopers.com.owlsweather.ui.repository.TownsRepository
 import owlsdevelopers.com.owlsweather.ui.repository.TownsRepositoryImp
@@ -25,6 +26,7 @@ import owlsdevelopers.com.owlsweather.weatherlib.WeatherContext
 import permissions.dispatcher.NeedsPermission
 import permissions.dispatcher.RuntimePermissions
 import java.util.*
+import javax.inject.Inject
 
 
 @RuntimePermissions
@@ -32,16 +34,18 @@ class AddTownActivity : Activity() {
 
 
     private var adp: CityAdapter? = null
-    private var client: WeatherClient? = null
-    private var townsRepository: TownsRepository? = null
+
+    @Inject
+    lateinit var data: DataManager
+    @Inject
+    lateinit var townsRepository: TownsRepository
+    @Inject
+    lateinit var client: WeatherClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        injectDepedency()
         setContentView(R.layout.search_location_activity)
-        val data = (applicationContext as OwlsWeatherApplication).dataManager
-        townsRepository = TownsRepositoryImp(data)
-
-        client = WeatherContext.getInstance().getClient(this, data)
 
         adp = CityAdapter(this, ArrayList<City>())
         cityList?.adapter = adp
@@ -68,17 +72,15 @@ class AddTownActivity : Activity() {
             editor.putString("townCode", "" + city.id)
             editor.commit()
 
-            val dm = (applicationContext as OwlsWeatherApplication).dataManager
-            Log.d("Weather", "Towns count: " + townsRepository?.getTowns()?.size)
             val town = Town(townName = city.name, townCode = city.id)
             town.title = city.name
-            townsRepository?.addTown(town, true)
-            dm.save(this)
+            townsRepository.addTown(town, true)
+            data.save(this)
 
            // Log.d("Weather", "Town added: " + city.id)
            // Log.d("Weather", "Towns count: " + dm.towns.size)
 
-            if (townsRepository?.getTowns()?.size == 1) {
+            if (townsRepository.getTowns().size == 1) {
                 editor.putString("widgetTownCodePref", "" + city.id)
                 editor.commit()
             }
@@ -94,6 +96,10 @@ class AddTownActivity : Activity() {
         AddTownActivityPermissionsDispatcher.searchByLocationWithCheck(this)
     }
 
+    fun injectDepedency(){
+        (applicationContext as OwlsWeatherApplication).applicationComponent?.inject(this)
+    }
+
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>?, grantResults: IntArray?) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         AddTownActivityPermissionsDispatcher.onRequestPermissionsResult(this, requestCode, grantResults);
@@ -105,7 +111,7 @@ class AddTownActivity : Activity() {
     fun searchByLocation() {
         progressBar?.visibility = View.VISIBLE
         try {
-            client!!.searchCityByLocation(WeatherClient.createDefaultCriteria(), object : WeatherClient.CityEventListener {
+            client.searchCityByLocation(WeatherClient.createDefaultCriteria(), object : WeatherClient.CityEventListener {
 
                 override fun onCityListRetrieved(cityList: List<City>) {
                     progressBar?.visibility = View.GONE
@@ -128,7 +134,7 @@ class AddTownActivity : Activity() {
 
     private fun search(pattern: String) {
         progressBar?.visibility = View.VISIBLE
-        client?.searchCity(pattern, object : WeatherClient.CityEventListener {
+        client.searchCity(pattern, object : WeatherClient.CityEventListener {
             override fun onCityListRetrieved(cityList: List<City>) {
                 progressBar?.visibility = View.GONE
                 adp?.setCityList(cityList)

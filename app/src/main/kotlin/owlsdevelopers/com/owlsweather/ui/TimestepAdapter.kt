@@ -12,12 +12,12 @@ import owlsdevelopers.com.owlsweather.R
 import owlsdevelopers.com.owlsweather.ui.model.WeatherTimestep
 
 
-class TimestepAdapter(val context: Context, data: List<WeatherTimestep>,
+class TimestepAdapter(val context: Context, data: Array<WeatherTimestep>,
                       private val clickListener: TimestepClickListener) : RecyclerView.Adapter<TimestepAdapter.ViewHolder>() {
 
 
 
-    var data: List<WeatherTimestep> = data
+    var data: Array<WeatherTimestep> = data
         set(value) {
             field = value
             notifyDataSetChanged()

@@ -1,12 +1,11 @@
 package owlsdevelopers.com.owlsweather.data
 
+
 import android.content.Context
 import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import owlsdevelopers.com.owlsweather.ui.model.Town
-
-
 import java.io.File
 import java.io.PrintWriter
 

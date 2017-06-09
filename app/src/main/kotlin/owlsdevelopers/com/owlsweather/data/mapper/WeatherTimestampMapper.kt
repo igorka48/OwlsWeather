@@ -21,19 +21,19 @@ class WeatherTimestampMapper {
         DAY, EVE, NIGHT, MORNING
     }
 
-    fun map(context: Context, forecast: WeatherForecast): ArrayList<WeatherTimestep> {
-        var timestamps = ArrayList<WeatherTimestep>()
+    fun map(context: Context, forecast: WeatherForecast): Array<WeatherTimestep> {
+        var timestamps = mutableListOf<WeatherTimestep>()
 
 
         for(day in forecast.forecast){
-            timestamps.add(watherFromDay(context, day, forecast.unit))
+             timestamps.add(watherFromDay(context, day, forecast.unit))
 //            timestamps.add(watherFromDay(day, DayTimes.MORNING, forecast.unit))
 //            timestamps.add(watherFromDay(day, DayTimes.DAY, forecast.unit))
 //            timestamps.add(watherFromDay(day, DayTimes.EVE, forecast.unit))
 //            timestamps.add(watherFromDay(day, DayTimes.NIGHT, forecast.unit))
         }
 
-        return timestamps;
+        return timestamps.toTypedArray()
     }
 
     fun watherFromDay(context: Context, day: DayForecast/*, time: DayTimes*/, units: BaseWeather.WeatherUnit): WeatherTimestep {

@@ -2,11 +2,13 @@ package owlsdevelopers.com.owlsweather.ui.repository
 
 import owlsdevelopers.com.owlsweather.data.DataManager
 import owlsdevelopers.com.owlsweather.ui.model.Town
+import javax.inject.Inject
 
 /**
  * Created by igorka on 6/8/17.
  */
- class TownsRepositoryImp(val dataManager: DataManager): TownsRepository() {
+class TownsRepositoryImp
+@Inject internal constructor(val dataManager: DataManager): TownsRepository() {
     override fun addTown(town: Town, checkUnique: Boolean) {
         dataManager.townsMap.put(town.townCode, town)
     }

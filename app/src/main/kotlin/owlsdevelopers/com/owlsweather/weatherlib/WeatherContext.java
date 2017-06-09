@@ -15,6 +15,7 @@ import owlsdevelopers.com.owlsweather.R;
 import owlsdevelopers.com.owlsweather.data.DataManager;
 import owlsdevelopers.com.owlsweather.ui.repository.SettingsRepository;
 import owlsdevelopers.com.owlsweather.data.repository.SettingsRepositoryImp;
+import owlsdevelopers.com.owlsweather.ui.repository.TownsRepository;
 
 
 public class WeatherContext {
@@ -31,12 +32,12 @@ public class WeatherContext {
         return me;
     }
 
-    public WeatherClient getClient(Context ctx, DataManager dm) {
+    public WeatherClient getClient(Context ctx, TownsRepository repository) {
         if (client != null)
             return client;
 
         try {
-            settings = new SettingsRepositoryImp(ctx, null);
+            settings = new SettingsRepositoryImp(ctx, repository);
             WeatherConfig config = new WeatherConfig();
             config.numDays = 10;
             config.unitSystem = ((WeatherLibUnitSystem)settings.getCurrentUnitSystem()).unitSystemValue();

@@ -1,10 +1,14 @@
 package owlsdevelopers.com.owlsweather.widgets
 
+import android.app.Service
 import owlsdevelopers.com.owlsweather.OwlsWeatherApplication
 import owlsdevelopers.com.owlsweather.R
+import owlsdevelopers.com.owlsweather.data.DataManager
 import owlsdevelopers.com.owlsweather.ui.model.Town
 import owlsdevelopers.com.owlsweather.ui.HomeActivity
+import owlsdevelopers.com.owlsweather.ui.repository.TownsRepository
 import owlsdevelopers.com.owlsweather.ui.repository.TownsRepositoryImp
+import javax.inject.Inject
 
 
 class WidgetSmall : android.appwidget.AppWidgetProvider() {
@@ -41,11 +45,14 @@ class WidgetSmall : android.appwidget.AppWidgetProvider() {
         android.util.Log.d(LOG_TAG, "onDisabled")
     }
 
-    class UpdateService : android.app.Service() {
-
+    class UpdateService : Service() {
+        @Inject
+        lateinit var data: DataManager
+        @Inject
+        lateinit var townsRepository: TownsRepository
         override fun onStart(intent: android.content.Intent, startId: Int) {
             // Build the widget update for today
-
+            injectDepedency()
             val updateViews = buildUpdate(this)
 
             // Push update for this widget to the home screen
@@ -53,7 +60,9 @@ class WidgetSmall : android.appwidget.AppWidgetProvider() {
             val manager = android.appwidget.AppWidgetManager.getInstance(this)
             manager.updateAppWidget(thisWidget, updateViews)
         }
-
+        fun injectDepedency(){
+            (applicationContext as OwlsWeatherApplication).applicationComponent?.inject(this)
+        }
         fun buildUpdate(context: android.content.Context): android.widget.RemoteViews {
             val intent = android.content.Intent(context, HomeActivity::class.java)
             val pendingIntent = android.app.PendingIntent.getActivity(context, 0,

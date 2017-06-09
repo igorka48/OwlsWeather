@@ -8,11 +8,13 @@ import owlsdevelopers.com.owlsweather.ui.model.UnitSystem
 import owlsdevelopers.com.owlsweather.ui.repository.SettingsRepository
 import owlsdevelopers.com.owlsweather.ui.repository.TownsRepository
 import owlsdevelopers.com.owlsweather.weatherlib.WeatherLibUnitSystem
+import javax.inject.Inject
 
 /**
  * Created by igorka on 6/3/17.
  */
-class SettingsRepositoryImp(val context: Context, val townsRepository: TownsRepository?) : SettingsRepository {
+class SettingsRepositoryImp
+@Inject internal constructor(val context: Context, val townsRepository: TownsRepository) : SettingsRepository {
     override fun getLanguageVariants(): Array<String> {
         return arrayOf("ru", "en", "de", "uk", "es", "fr")
     }
@@ -38,7 +40,7 @@ class SettingsRepositoryImp(val context: Context, val townsRepository: TownsRepo
     }
 
     override fun getTowns(): Array<Town> {
-        return townsRepository?.getTowns() ?: arrayOf<Town>()
+        return townsRepository.getTowns()
     }
 
     override fun getTownForWidgets(): Town? {
@@ -46,7 +48,7 @@ class SettingsRepositoryImp(val context: Context, val townsRepository: TownsRepo
                 .getDefaultSharedPreferences(context)
         val townId = sharedPrefs.getString(TOWN_PREF_KEY, "")
         if (townId.isEmpty())return null
-        return townsRepository?.getTownByCode(townId)
+        return townsRepository.getTownByCode(townId)
     }
 
     override fun setTownForWidgets(town: Town): Boolean {
