@@ -1,6 +1,7 @@
 package owlsdevelopers.com.owlsweather
 
 import android.content.*
+import android.support.v4.content.LocalBroadcastManager
 
 class WeatherBroadcastReceiver(var callback: WeatherLoaderCallback) : BroadcastReceiver() {
 
@@ -30,31 +31,36 @@ class WeatherBroadcastReceiver(var callback: WeatherLoaderCallback) : BroadcastR
         fun sign(context: Context,  callback: WeatherLoaderCallback): WeatherBroadcastReceiver {
             var br: WeatherBroadcastReceiver = WeatherBroadcastReceiver(callback)
             val intentFilter = IntentFilter(WEATHER_LOADING_MESSAGE)
-            context.registerReceiver(br, intentFilter)
+            LocalBroadcastManager.getInstance(context).registerReceiver(br, intentFilter)
             return br
         }
 
         fun unsign(context: Context, br: WeatherBroadcastReceiver?) {
-            context.unregisterReceiver(br)
+            LocalBroadcastManager.getInstance(context).unregisterReceiver(br)
         }
 
         fun sendLoadinStart(context: Context) {
             val intent = Intent(WEATHER_LOADING_MESSAGE)
             intent.putExtra(PARAM_STATUS, 1)
-            context.sendBroadcast(intent)
+            sendBroadcast(context, intent)
         }
 
         fun sendLoadingCompleted(context: Context) {
             val intent = Intent(WEATHER_LOADING_MESSAGE)
             intent.putExtra(PARAM_STATUS, 2)
-            context.sendBroadcast(intent)
+            sendBroadcast(context, intent)
         }
 
         fun sendLoadingError(context: Context, error: Throwable) {
             val intent = Intent(WEATHER_LOADING_MESSAGE)
             intent.putExtra(PARAM_STATUS, 2)
             intent.putExtra(PARAM_MESSAGE, error.localizedMessage)
-            context.sendBroadcast(intent)
+            sendBroadcast(context, intent)
         }
+
+        private fun sendBroadcast(context: Context, intent: Intent){
+            LocalBroadcastManager.getInstance(context).sendBroadcast(intent)
+        }
+
     }
 }
